@@ -1,0 +1,41 @@
+#main {
+    position: relative;
+    -webkit-transition: -webkit-transform 0.2s ease;
+         -o-transition: -o-transform 0.2s ease;
+            transition: transform 0.2s ease;
+  }
+  #main:before,
+  #main:after {
+    content: " ";
+    display: table;
+  }
+  #main:after {
+    clear: both;
+  }
+  #main > .container-fluid,
+  #main > .container {
+    float: left;
+    width: 100%;
+    padding: 15px;
+    padding-bottom: 0;
+  }
+
+
+  /* ----------------------------
+ *
+ * Template Sidebar - screen-sm and up
+ *
+ * --------------------------- */
+@media (min-width: 768px) {
+   
+    #main {
+      margin-left: 240px;
+    }
+ 
+  }
+
+
+
+
+
+  

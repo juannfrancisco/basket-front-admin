@@ -1,0 +1,92 @@
+<section id="main" role="main">
+  <div class="container-fluid">
+
+    <div class="row">
+      <div class="col-12">
+        <div class="page-title-box">
+          <div class="page-title-right">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a routerLink="/app">Home</a>
+              </li>
+              <li class="breadcrumb-item">
+                <a routerLink="/app/courts">Canchas</a>
+              </li>
+              <li class="breadcrumb-item active" aria-current="page">Nueva</li>
+            </ol>
+          </div>
+          <h4 class="page-title">Canchas</h4>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-block">
+
+      <div class="card">
+        <div class="card-body">
+
+          <div class="row">
+            <div class="col-md-6" style="border-right:1px solid #e0e7e8;">
+              <form class="form-horizontal form-bordered" id="form-crear-equipo" [formGroup]="courtForm">
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">Nombre</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" formControlName="name" data-parsley-errors-container="#error-container" data-parsley-error-message="ingrese el nombre del equipo"
+                      data-parsley-required>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">Descripción</label>
+                  <div class="col-sm-9">
+                    <textarea class="form-control" formControlName="description" data-parsley-errors-container="#error-container" data-parsley-error-message="ingrese una descripci�n"
+                      data-parsley-required></textarea>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">Cantidad Espectadores</label>
+                  <div class="col-sm-9">
+                    <input type="number" class="form-control" formControlName="spectators" data-parsley-errors-container="#error-container" data-parsley-required>
+                  </div>
+                </div>
+
+
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">Latitude</label>
+                  <div class="col-sm-9">
+                    <input type="number" class="form-control" formControlName="latitude" data-parsley-errors-container="#error-container" data-parsley-required>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">Longitud</label>
+                  <div class="col-sm-9">
+                    <input type="number" class="form-control" formControlName="longitude" data-parsley-errors-container="#error-container" data-parsley-required>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="col-sm-12">
+                    <button class="btn btn-success btn-block mt15 mb15" value="button" (click)="save()">Guardar</button>
+                  </div>
+                </div>
+                <div *ngIf="diplayError" class="alert alert-danger">{{errorMsg}}</div>
+              </form>
+            </div>
+
+            <div class="col-md-6 hidden-xs hidden-sm">
+              <section class="jumbotron jumbotron-bg10" data-stellar-background-ratio="0.4" style="min-height:320px;">
+                <div class="pattern pattern2 overlay overlay-primary"></div>
+                <div class="container" style="padding-top:8%;">
+                  <h1 class="thin text-white text-center font-alt">Nueva cancha.</h1>
+                  <h4 class="thin text-white text-center">El talento gana juegos, pero el trabajo de equipo y la inteligencia ganan campeonatos</h4>
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
