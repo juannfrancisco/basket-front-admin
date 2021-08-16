@@ -13,6 +13,7 @@ import { SidebarComponent } from './private/common/sidebar/sidebar.component';
 import { UserListComponent } from './private/users/user-list/user-list.component';
 import { CourtListComponent } from './private/courts/court-list/court-list.component';
 import { CourtCreateComponent } from './private/courts/court-create/court-create.component';
+import { PageHeaderComponent } from './private/common/page-header/page-header.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { CourtCreateComponent } from './private/courts/court-create/court-create
     SidebarComponent,
     UserListComponent,
     CourtListComponent,
-    CourtCreateComponent
+    CourtCreateComponent,
+    PageHeaderComponent
   ],
   imports: [
     BrowserModule,

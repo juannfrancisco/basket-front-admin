@@ -1,3 +1,4 @@
+import { BreadcrumbItem } from './../../../models/breadcrumb-item';
 import { CourtsService } from './../../../services/courts.service';
 import { Court } from './../../../models/court';
 import { Component, OnInit } from '@angular/core';
@@ -10,6 +11,11 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class CourtCreateComponent implements OnInit {
 
+  title:string = "Nueva Cancha";
+  breadcrumbs:BreadcrumbItem[] = [
+    {name:"Home",link:"/app"}, 
+    {name:"Canchas",link:"/app/courts"} 
+  ];
   errorMsg: string = "";
   diplayError: boolean = false;
 

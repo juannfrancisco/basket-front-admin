@@ -1,3 +1,4 @@
+import { BreadcrumbItem } from './../../../models/breadcrumb-item';
 import { Court } from './../../../models/court';
 import { CourtsService } from './../../../services/courts.service';
 import { Component, OnInit } from '@angular/core';
@@ -9,6 +10,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CourtListComponent implements OnInit {
 
+  title:string = "Canchas";
+  breadcrumbs:BreadcrumbItem[] = [
+    {name:"Home",link:"/app"}, 
+  ];
   courts: Court[] = [];
   flagLoading = false;
   flagErrorLoading = false;

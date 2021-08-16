@@ -1,87 +1,69 @@
 <section id="main" role="main">
     <div class="container-fluid">
 
+        <app-page-header [title]="title" [breadcrumbs]="breadcrumbs">
+        </app-page-header>
+
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="input-group">
+                            <input type="text" ng-model="q" placeholder="Buscar..." class="form-control" />
+                            <a routerLink="create" class="btn btn-outline-secondary" type="button" id="button-addon2">Nueva</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-12">
-                <div class="page-title-box">
-                    <div class="page-title-right">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item">
-                                <a routerLink="/app">Home</a>
-                            </li>
-                            <li class="breadcrumb-item active" aria-current="page">Canchas</li>
-                        </ol>
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">First</th>
+                                    <th scope="col">Last</th>
+                                    <th scope="col">Handle</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let e of courts">
+                                    <th scope="row">{{e.oid}}</th>
+                                    <td>{{e.name}}</td>
+                                    <td>{{e.description}}</td>
+                                    <td>
+                                        <button>ver</button>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
                     </div>
-                    <h4 class="page-title">Canchas</h4>
                 </div>
             </div>
-        </div>
-        <div class="page-header page-header-block">
-            <div class="toolbar hidden-xs">
-                <div class="col-md-6 col-md-offset-6">
-                    <div class="panel-toolbar">
-                        <div class="input-group">
-                            <div class="has-icon">
-                                <input type="text" ng-model="q" placeholder="buscar" class="form-control" />
-                                <i class="ico-search form-control-icon"></i>
-                            </div>
-                            <div class="input-group-btn">
-                                <a routerLink="create" class="btn btn-default">Nuevo</a>
 
-                            </div>
-                        </div>
-                    </div>
+            <div class="col-md-12" *ngIf="!flagLoading && courts.length == 0">
+                <strong *ngIf="!flagErrorLoading">No existen canchas, presione el boton "nuevo" para agregar...</strong>
+            </div>
 
+
+            <div class="col-md-12 mb20 mt20" *ngIf="flagErrorLoading" style="text-align: center;">
+                <strong style="color:gray;">Ocurrio un error al cargar la información, intente más tarde</strong>
+                <div>
+                    <i style="font-size:100px;color: #EBEBEB;" class=" ico-heart-broken mb20 mt20"></i>
                 </div>
             </div>
+
         </div>
+
+
+
+
     </div>
 
-    <div class="row">
 
-
-
-        <div class="col-xs-6 col-sm-3 col-md-2" *ngFor="let e of courts">
-            <div class="thumbnail thumbnail-album animation animating  fadeInLeft">
-                <div class="media">
-                    <div class="indicator">
-                        <span class="spinner"></span>
-                    </div>
-                    <div class="overlay hidden-xs hidden-sm">
-                        <div class="toolbar">
-                            <a routerLink="{{e.oid}}" class="btn btn-default" title="upload to collection">
-                                <i class="ico-eye"></i>
-                            </a>
-                            <a routerLink="edit/{{e.oid}}" class="btn btn-success" title="watch collection">
-                                <i class="ico-edit"></i>
-                            </a>
-                            <a href="javascript:void(0);" class="btn btn-default" ng-click="eliminar(e)">
-                                <i class="ico-remove4"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <img data-toggle="unveil" ng-src="../image/icons/teams-default4.png" alt="Cover" width="100%" class="unveiled">
-                </div>
-                <div class="caption text-center">
-                    <h5 class="semibold mt0 mb5">{{e.name}}</h5>
-                    <p class="text-muted mb5 ellipsis">
-
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-12" *ngIf="!flagLoading && courts.length == 0">
-            <strong *ngIf="!flagErrorLoading">No existen canchas, presione el boton "nuevo" para agregar...</strong>
-        </div>
-
-
-        <div class="col-md-12 mb20 mt20" *ngIf="flagErrorLoading" style="text-align: center;">
-            <strong style="color:gray;">Ocurrio un error al cargar la información, intente más tarde</strong>
-            <div>
-                <i style="font-size:100px;color: #EBEBEB;" class=" ico-heart-broken mb20 mt20"></i>
-            </div>
-        </div>
-
-    </div>
 </section>
