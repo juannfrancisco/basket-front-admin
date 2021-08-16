@@ -1,0 +1,28 @@
+steps:
+ - id: install_packages
+   name: 'gcr.io/cloud-builders/npm'
+   args:
+   - 'install'
+ - id: prerender_browser_files
+   name: 'gcr.io/cloud-builders/npm'
+   entrypoint: 'bash'
+   args:
+    - '-c'
+    - |-
+      npm run build-prod
+   waitFor:
+   - install_packages
+ - id: remove_to_bucket
+   name: 'gcr.io/cloud-builders/gsutil'
+   entrypoint: 'bash'
+   args:
+    - '-c'
+    - |-
+      gsutil -m rm -r gs://basketball-pro-admin-ui/** || exit 0
+ - id: upload_to_bucket
+   name: 'gcr.io/cloud-builders/gsutil'
+   entrypoint: 'bash'
+   args:
+    - '-c'
+    - |-
+      gsutil -m cp -r dist/basket-front-admin/* gs://basketball-pro-admin-ui/
