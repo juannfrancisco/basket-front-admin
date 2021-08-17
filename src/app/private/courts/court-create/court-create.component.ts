@@ -2,7 +2,8 @@ import { BreadcrumbItem } from './../../../models/breadcrumb-item';
 import { CourtsService } from './../../../services/courts.service';
 import { Court } from './../../../models/court';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-court-create',
@@ -11,27 +12,37 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class CourtCreateComponent implements OnInit {
 
-  title:string = "Nueva Cancha";
-  breadcrumbs:BreadcrumbItem[] = [
-    {name:"Home",link:"/app"}, 
-    {name:"Canchas",link:"/app/courts"} 
+  title: string = "Nueva Cancha";
+  breadcrumbs: BreadcrumbItem[] = [
+    { name: "Home", link: "/app" },
+    { name: "Canchas", link: "/app/courts" }
   ];
   errorMsg: string = "";
   diplayError: boolean = false;
+  court: Court;
 
   courtForm = new FormGroup({
-    oid: new FormControl(''),
-    name: new FormControl(''),
-    description: new FormControl(''),
-    spectators: new FormControl(''),
+    //oid: new FormControl('', Validators.required),
+    name: new FormControl('', [Validators.required, Validators.minLength(4)]),
+    description: new FormControl('', Validators.required),
+    spectators: new FormControl('', Validators.required),
     latitude: new FormControl(''),
     longitude: new FormControl('')
   });
 
 
-  constructor( private service: CourtsService ) { }
+  constructor(
+    private service: CourtsService,
+    private router: Router) { }
 
   ngOnInit() {
+  }
+
+  classFormControl(name) {
+    return {
+      'is-invalid': this.courtForm.get(name).invalid && this.courtForm.get(name).dirty,
+      'is-valid': this.courtForm.get(name).valid
+    }
   }
 
   save() {
@@ -46,11 +57,16 @@ export class CourtCreateComponent implements OnInit {
       }
     };
 
-    this.service.save( court ).subscribe(
-      data=>{}, 
-      err=>{}
+    this.service.save(court).subscribe(
+      data => {
+        this.router.navigate(["/app/courts"]);
+      },
+      err => {
+        this.diplayError = true;
+        this.errorMsg = "Ocurrio un error al almacenar los datos";
+      }
     );
- 
+
   }
 
 }

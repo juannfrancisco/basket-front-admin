@@ -9,32 +9,33 @@
       <div class="card-body">
 
         <div class="row">
-          <div class="col-md-6" style="border-right:1px solid #e0e7e8;">
+          <div class="col-md-8" style="border-right:1px solid #e0e7e8;">
+
+
+
+            <!--app-court-form [court]="court"></app-court-form-->
 
             <form class="form-horizontal form-bordered" id="form-crear-equipo" [formGroup]="courtForm">
 
               <div class="mb-3">
                 <label class="form-label">Nombre</label>
-                <input type="text" class="form-control" formControlName="name" data-parsley-error-message="ingrese el nombre del equipo">
-
+                <input type="text" class="form-control" formControlName="name" [ngClass]="classFormControl('name')">
               </div>
 
               <div class="mb-3">
                 <label class="form-label">Descripción</label>
-                <textarea class="form-control" formControlName="description" data-parsley-error-message="ingrese una descripci�n"></textarea>
+                <textarea class="form-control" formControlName="description" [ngClass]="classFormControl('description')"></textarea>
               </div>
 
               <div class="mb-3">
                 <label class="col-sm-3 form-label">Cantidad Espectadores</label>
-                <input type="number" class="form-control" formControlName="spectators">
-
+                <input type="number" class="form-control" formControlName="spectators" [ngClass]="classFormControl('spectators')">
               </div>
 
 
               <div class="mb-3">
                 <label class="col-sm-3 form-label">Latitude</label>
                 <input type="number" class="form-control" formControlName="latitude">
-
               </div>
 
               <div class="mb-3">
@@ -45,15 +46,19 @@
 
               <div class="mb-3">
                 <div class="col-sm-12">
-                  <button class="btn btn-primary btn-block mt15 mb15" value="button" (click)="save()">Guardar</button>
+                  <div class="d-grid gap-2">
+                    <button class="btn btn-primary" value="button" [disabled]="courtForm.invalid" (click)="save()">Guardar</button>
+                  </div>
                 </div>
               </div>
               <div *ngIf="diplayError" class="alert alert-danger">{{errorMsg}}</div>
             </form>
           </div>
 
-          <div class="col-md-6 hidden-xs hidden-sm">
-
+          <div class="col-md-4 hidden-xs hidden-sm">
+            <div>
+              <img class="img-fluid" src="assets/image/icons/basket-court-01.jpeg">
+            </div>
           </div>
         </div>
       </div>

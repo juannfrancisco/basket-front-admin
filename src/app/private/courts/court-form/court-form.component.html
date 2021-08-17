@@ -1,0 +1,38 @@
+<form class="form-horizontal form-bordered" id="form-crear-equipo" [formGroup]="courtForm">
+
+  <div class="mb-3">
+    <label class="form-label">Nombre</label>
+    <input type="text" class="form-control" formControlName="name" data-parsley-error-message="ingrese el nombre del equipo">
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Descripción</label>
+    <textarea class="form-control" formControlName="description" data-parsley-error-message="ingrese una descripci�n"></textarea>
+  </div>
+
+  <div class="mb-3">
+    <label class="col-sm-3 form-label">Cantidad Espectadores</label>
+    <input type="number" class="form-control" formControlName="spectators">
+  </div>
+
+  <div class="mb-3">
+    <label class="col-sm-3 form-label">Latitude</label>
+    <input type="number" class="form-control" formControlName="latitude">
+  </div>
+
+  <div class="mb-3">
+    <label class="col-sm-3 form-label">Longitud</label>
+    <input type="number" class="form-control" formControlName="longitude">
+  </div>
+
+  <div class="mb-3">
+    <div class="col-sm-12">
+      <div class="d-grid gap-2">
+        <button class="btn btn-primary" value="button" (click)="save()">Guardar</button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="diplayError" class="alert alert-danger">{{errorMsg}}</div>
+
+</form>

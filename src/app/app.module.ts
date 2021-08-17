@@ -14,6 +14,8 @@ import { UserListComponent } from './private/users/user-list/user-list.component
 import { CourtListComponent } from './private/courts/court-list/court-list.component';
 import { CourtCreateComponent } from './private/courts/court-create/court-create.component';
 import { PageHeaderComponent } from './private/common/page-header/page-header.component';
+import { CourtFormComponent } from './private/courts/court-form/court-form.component';
+import { LoadingComponent } from './private/common/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { PageHeaderComponent } from './private/common/page-header/page-header.co
     UserListComponent,
     CourtListComponent,
     CourtCreateComponent,
-    PageHeaderComponent
+    PageHeaderComponent,
+    CourtFormComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,

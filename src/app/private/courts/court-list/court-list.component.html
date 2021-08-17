@@ -9,6 +9,9 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="input-group">
+                            <span class="input-group-text" id="icon-search">
+                                <i class="bi bi-search"></i>
+                            </span>
                             <input type="text" ng-model="q" placeholder="Buscar..." class="form-control" />
                             <a routerLink="create" class="btn btn-outline-secondary" type="button" id="button-addon2">Nueva</a>
                         </div>
@@ -18,52 +21,38 @@
         </div>
 
         <div class="row">
-            <div class="col-12">
+            <div class="col-3" *ngFor="let e of courts">
                 <div class="card">
+                    <img src="assets/image/icons/basket-court.jpeg" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">First</th>
-                                    <th scope="col">Last</th>
-                                    <th scope="col">Handle</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let e of courts">
-                                    <th scope="row">{{e.oid}}</th>
-                                    <td>{{e.name}}</td>
-                                    <td>{{e.description}}</td>
-                                    <td>
-                                        <button>ver</button>
-                                    </td>
-                                </tr>
-
-                            </tbody>
-                        </table>
+                        <h5 class="card-title">{{e.name}}</h5>
                     </div>
-                </div>
-            </div>
-
-            <div class="col-md-12" *ngIf="!flagLoading && courts.length == 0">
-                <strong *ngIf="!flagErrorLoading">No existen canchas, presione el boton "nuevo" para agregar...</strong>
-            </div>
-
-
-            <div class="col-md-12 mb20 mt20" *ngIf="flagErrorLoading" style="text-align: center;">
-                <strong style="color:gray;">Ocurrio un error al cargar la información, intente más tarde</strong>
-                <div>
-                    <i style="font-size:100px;color: #EBEBEB;" class=" ico-heart-broken mb20 mt20"></i>
                 </div>
             </div>
 
         </div>
 
 
+        <div class="row">
+            <div class="col-md-12" *ngIf="!flagLoading && courts.length == 0">
+                <div class="card">
+                    <div class="card-body">
+                        <strong *ngIf="!flagErrorLoading">No existen canchas, presione el boton "nuevo" para agregar...</strong>
+                    </div>
+                </div>
+            </div>
 
 
+            <div class="col-md-12 mb20 mt20" *ngIf="flagErrorLoading" style="text-align: center;">
+                <div class="card">
+                    <div class="card-body">
+                        <strong style="color:gray;">Ocurrio un error al cargar la información, intente más tarde</strong>
+                        <div>
+                            <i style="font-size:100px;color: #EBEBEB;" class=" ico-heart-broken mb20 mt20"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
-
 </section>

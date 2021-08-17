@@ -1,4 +1,4 @@
-import { BreadcrumItem } from './../../../models/breadcrum-item';
+import { BreadcrumbItem } from './../../../models/breadcrumb-item';
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
@@ -9,7 +9,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class PageHeaderComponent implements OnInit {
 
   @Input() title:string= '';
-  @Input() breadcrumbs:BreadcrumItem[] = [];
+  @Input() breadcrumbs:BreadcrumbItem[] = [];
 
   constructor() { }
 
