@@ -1,3 +1,4 @@
+import { LoadingService } from './../../../services/loading.service';
 import { BreadcrumbItem } from './../../../models/breadcrumb-item';
 import { CourtsService } from './../../../services/courts.service';
 import { Court } from './../../../models/court';
@@ -19,54 +20,42 @@ export class CourtCreateComponent implements OnInit {
   ];
   errorMsg: string = "";
   diplayError: boolean = false;
-  court: Court;
-
-  courtForm = new FormGroup({
-    //oid: new FormControl('', Validators.required),
-    name: new FormControl('', [Validators.required, Validators.minLength(4)]),
-    description: new FormControl('', Validators.required),
-    spectators: new FormControl('', Validators.required),
-    latitude: new FormControl(''),
-    longitude: new FormControl('')
-  });
-
+  court: Court = new Court();
+  isLoading:boolean = false;
 
   constructor(
     private service: CourtsService,
+    private loadingService:LoadingService,
     private router: Router) { }
 
   ngOnInit() {
   }
 
-  classFormControl(name) {
-    return {
-      'is-invalid': this.courtForm.get(name).invalid && this.courtForm.get(name).dirty,
-      'is-valid': this.courtForm.get(name).valid
-    }
-  }
 
-  save() {
-    let court: Court = {
-      oid: "",
-      name: this.courtForm.get("name").value,
-      description: this.courtForm.get("description").value,
-      spectators: this.courtForm.get("spectators").value,
-      location: {
-        latitude: this.courtForm.get("latitude").value,
-        longitude: this.courtForm.get("longitude").value
-      }
-    };
-
+  saveCourt(court:Court){
+    this.showLoading();
     this.service.save(court).subscribe(
       data => {
         this.router.navigate(["/app/courts"]);
+        this.hideLoading();
       },
       err => {
         this.diplayError = true;
-        this.errorMsg = "Ocurrio un error al almacenar los datos";
+        this.errorMsg = "Ocurrio un error al almacenar los datos, Por favor intente mas tarde";
+        this.hideLoading();
       }
     );
+  }
 
+
+  showLoading(){
+    this.isLoading = true;
+    this.loadingService.show();
+  }
+
+  hideLoading(){
+    this.isLoading = false;
+    this.loadingService.hide();
   }
 
 }

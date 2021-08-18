@@ -1,34 +1,39 @@
-<form class="form-horizontal form-bordered" id="form-crear-equipo" [formGroup]="courtForm">
+
+
+<form class="form-horizontal form-bordered" id="form-crear-equipo" [formGroup]="courtForm" >
 
   <div class="mb-3">
     <label class="form-label">Nombre</label>
-    <input type="text" class="form-control" formControlName="name" data-parsley-error-message="ingrese el nombre del equipo">
+    <input type="text" class="form-control" formControlName="name" [ngClass]="classFormControl('name')" [(ngModel)]="court.name">
   </div>
 
   <div class="mb-3">
     <label class="form-label">Descripción</label>
-    <textarea class="form-control" formControlName="description" data-parsley-error-message="ingrese una descripci�n"></textarea>
+    <textarea class="form-control" formControlName="description" [ngClass]="classFormControl('description')" [(ngModel)]="court.description"></textarea>
   </div>
 
   <div class="mb-3">
     <label class="col-sm-3 form-label">Cantidad Espectadores</label>
-    <input type="number" class="form-control" formControlName="spectators">
+    <input type="number" class="form-control" formControlName="spectators" [ngClass]="classFormControl('spectators')" [(ngModel)]="court.spectators">
   </div>
 
   <div class="mb-3">
     <label class="col-sm-3 form-label">Latitude</label>
-    <input type="number" class="form-control" formControlName="latitude">
+    <input type="number" class="form-control" formControlName="latitude" [(ngModel)]="court.location.latitude">
   </div>
 
   <div class="mb-3">
     <label class="col-sm-3 form-label">Longitud</label>
-    <input type="number" class="form-control" formControlName="longitude">
+    <input type="number" class="form-control" formControlName="longitude" [(ngModel)]="court.location.longitude">
   </div>
 
   <div class="mb-3">
     <div class="col-sm-12">
       <div class="d-grid gap-2">
-        <button class="btn btn-primary" value="button" (click)="save()">Guardar</button>
+        <button class="btn btn-primary" value="button" [disabled]="courtForm.invalid || isLoading" (click)="save()">
+          Guardar
+          <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" *ngIf="isLoading" ></span>
+        </button>
       </div>
     </div>
   </div>

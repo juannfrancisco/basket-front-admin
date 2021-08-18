@@ -1,42 +1,42 @@
-import { Router } from '@angular/router';
 import { LoadingService } from './../../../services/loading.service';
+import { TeamsService } from './../../../services/teams.service';
+import { Team } from './../../../models/team';
 import { BreadcrumbItem } from './../../../models/breadcrumb-item';
-import { Court } from './../../../models/court';
-import { CourtsService } from './../../../services/courts.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-court-list',
-  templateUrl: './court-list.component.html',
-  styleUrls: ['./court-list.component.css']
+  selector: 'app-team-list',
+  templateUrl: './team-list.component.html',
+  styleUrls: ['./team-list.component.css']
 })
-export class CourtListComponent implements OnInit {
+export class TeamListComponent implements OnInit {
 
-  title:string = "Canchas";
+  title:string = "Equipos";
   breadcrumbs:BreadcrumbItem[] = [
     {name:"Home",link:"/app"}, 
   ];
-  courts: Court[] = [];
+  teams: Team[] = [];
   flagLoading = false;
   flagErrorLoading = false;
 
   constructor(
-    private service: CourtsService,
+    private service: TeamsService,
     private loadingService: LoadingService,
     private router: Router
   ) { }
 
   ngOnInit() {
     this.loadData();
-
   }
+
 
   loadData(){
 
     this.flagLoading = true;
     this.loadingService.show();
     this.service.findAll().subscribe(data => {
-      this.courts = data;
+      this.teams = data;
       this.flagLoading = false;
       this.loadingService.hide();
     }, err => {
@@ -47,9 +47,8 @@ export class CourtListComponent implements OnInit {
     
   }
 
-
-  edit(court:Court){
-    this.router.navigate( ['/app','courts',court.oid, 'edit'] );
+  edit(team:Team){
+    this.router.navigate( ['/app','teams',team.oid, 'edit'] );
   }
 
 }

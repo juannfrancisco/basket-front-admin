@@ -15,7 +15,21 @@ export class CourtsService {
     return this.http.get<Court[]>( environment.endpoint +  "courts" );
   }
 
+  findById( oid:string ){
+    return this.http.get<Court>( environment.endpoint +  "courts/" + oid );
+  }
+
+  deleteById( oid:string ){
+    return this.http.delete( environment.endpoint +  "courts/" + oid );
+  }
+
   save( court:Court ){
     return this.http.put( environment.endpoint +  "courts", court );
   }
+
+  update( court:Court ){
+    return this.http.post( environment.endpoint +  "courts", court );
+  }
+
+  
 }

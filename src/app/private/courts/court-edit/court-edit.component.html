@@ -1,0 +1,42 @@
+<section id="main" role="main">
+  <div class="container-fluid">
+
+    <app-page-header [title]="title" [breadcrumbs]="breadcrumbs">
+    </app-page-header>
+
+
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-8" style="border-right:1px solid #e0e7e8;">
+            <app-court-form [court]="court" [isLoading]="isLoading" (itemCourt)="editCourt($event)"></app-court-form>
+
+            <hr>
+
+            <div class="col-sm-12">
+
+              <div class="m-2 mt-4 text-secondary" >
+                <b>Precaucion</b>, Esta accion no se puede deshacer. Si realmente desaea eliminar el elemento por favor presione el boton eliminar</div>
+              <div class="d-grid gap-2">
+                <button class="btn btn-danger" value="button" (click)="remove()">
+                  Eliminar
+                  <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" *ngIf="isLoading"></span>
+                </button>
+              </div>
+            </div>
+
+            <hr>
+
+            <div *ngIf="diplayError" class="alert alert-danger">{{errorMsg}}</div>
+          </div>
+          <div class="col-md-4 hidden-xs hidden-sm">
+            <div>
+              <img class="img-fluid" src="assets/image/icons/basket-court-01.jpeg">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>

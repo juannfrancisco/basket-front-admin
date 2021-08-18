@@ -1,0 +1,60 @@
+<section id="main" role="main">
+  <div class="container-fluid">
+
+    <app-page-header [title]="title" [breadcrumbs]="breadcrumbs">
+    </app-page-header>
+
+
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="input-group">
+                        <span class="input-group-text" id="icon-search">
+                            <i class="bi bi-search"></i>
+                        </span>
+                        <input type="text" ng-model="q" placeholder="Buscar..." class="form-control" />
+                        <a routerLink="create" class="btn btn-outline-secondary" type="button" id="button-addon2">Nuevo</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-lg-3" *ngFor="let e of teams">
+            <div class="card mb-3" (click)="edit(e)">
+                <img src="assets/image/icons/basket-court.jpeg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{e.name}}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12" *ngIf="!flagLoading && teams.length == 0">
+            <div class="card">
+                <div class="card-body">
+                    <strong *ngIf="!flagErrorLoading">No existen equipos, presione el boton "nuevo" para agregar...</strong>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-12 mb20 mt20" *ngIf="flagErrorLoading" style="text-align: center;">
+            <div class="card">
+                <div class="card-body">
+                    <strong style="color:gray;">Ocurrio un error al cargar la información, intente más tarde</strong>
+                    <div>
+                        <i style="font-size:100px;color: #EBEBEB;" class=" ico-heart-broken mb20 mt20"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+  </div>
+</section>
