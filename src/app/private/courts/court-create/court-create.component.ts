@@ -1,3 +1,4 @@
+import { BaseComponent } from './../../../models/base-component';
 import { LoadingService } from './../../../services/loading.service';
 import { BreadcrumbItem } from './../../../models/breadcrumb-item';
 import { CourtsService } from './../../../services/courts.service';
@@ -11,51 +12,41 @@ import { Router } from '@angular/router';
   templateUrl: './court-create.component.html',
   styleUrls: ['./court-create.component.css']
 })
-export class CourtCreateComponent implements OnInit {
+export class CourtCreateComponent extends BaseComponent implements OnInit {
 
-  title: string = "Nueva Cancha";
-  breadcrumbs: BreadcrumbItem[] = [
-    { name: "Home", link: "/app" },
-    { name: "Canchas", link: "/app/courts" }
-  ];
-  errorMsg: string = "";
-  diplayError: boolean = false;
   court: Court = new Court();
-  isLoading:boolean = false;
+  isLoading: boolean = false;
 
   constructor(
     private service: CourtsService,
-    private loadingService:LoadingService,
-    private router: Router) { }
+    private loadingService: LoadingService,
+    private router: Router) {
+
+    super("Nueva Cancha",[
+      { name: "Home", link: "/app" },
+      { name: "Canchas", link: "/app/courts" }
+    ]);
+
+  }
 
   ngOnInit() {
+
   }
 
 
-  saveCourt(court:Court){
-    this.showLoading();
+  saveCourt(court: Court) {
+    this.showLoading( this.loadingService );
     this.service.save(court).subscribe(
       data => {
         this.router.navigate(["/app/courts"]);
-        this.hideLoading();
+        this.hideLoading( this.loadingService );
       },
       err => {
-        this.diplayError = true;
-        this.errorMsg = "Ocurrio un error al almacenar los datos, Por favor intente mas tarde";
-        this.hideLoading();
+        this.hideLoading( this.loadingService );
+        this.showErrorMessage();
       }
     );
   }
 
-
-  showLoading(){
-    this.isLoading = true;
-    this.loadingService.show();
-  }
-
-  hideLoading(){
-    this.isLoading = false;
-    this.loadingService.hide();
-  }
 
 }

@@ -10,7 +10,7 @@
           <div class="col-md-8" style="border-right:1px solid #e0e7e8;">
             <app-court-form [court]="court" [isLoading]="isLoading" (itemCourt)="saveCourt($event)"></app-court-form>
             
-            <div *ngIf="diplayError" class="alert alert-danger">{{errorMsg}}</div>
+            <div *ngIf="hasError" class="alert alert-danger">{{errorMessage}}</div>
             
           </div>
 

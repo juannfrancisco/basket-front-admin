@@ -1,6 +1,6 @@
 
 
-<form class="form-horizontal form-bordered" id="form-crear-equipo" [formGroup]="courtForm" >
+<form id="form-crear-equipo" [formGroup]="courtForm" >
 
   <div class="mb-3">
     <label class="form-label">Nombre</label>
@@ -37,7 +37,5 @@
       </div>
     </div>
   </div>
-
-  <div *ngIf="diplayError" class="alert alert-danger">{{errorMsg}}</div>
 
 </form>

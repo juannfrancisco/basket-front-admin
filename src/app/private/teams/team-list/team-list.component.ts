@@ -1,3 +1,4 @@
+import { BaseComponent } from './../../../models/base-component';
 import { LoadingService } from './../../../services/loading.service';
 import { TeamsService } from './../../../services/teams.service';
 import { Team } from './../../../models/team';
@@ -10,21 +11,19 @@ import { Router } from '@angular/router';
   templateUrl: './team-list.component.html',
   styleUrls: ['./team-list.component.css']
 })
-export class TeamListComponent implements OnInit {
-
-  title:string = "Equipos";
-  breadcrumbs:BreadcrumbItem[] = [
-    {name:"Home",link:"/app"}, 
-  ];
-  teams: Team[] = [];
-  flagLoading = false;
-  flagErrorLoading = false;
+export class TeamListComponent extends BaseComponent implements OnInit {
+  
+  elements: Team[] = []; 
 
   constructor(
     private service: TeamsService,
     private loadingService: LoadingService,
     private router: Router
-  ) { }
+  ) {
+    super("Equipos",[
+      {name:"Home",link:"/app"}, 
+    ]);
+   }
 
   ngOnInit() {
     this.loadData();
@@ -33,16 +32,15 @@ export class TeamListComponent implements OnInit {
 
   loadData(){
 
-    this.flagLoading = true;
-    this.loadingService.show();
+    this.showLoading( this.loadingService );
+
     this.service.findAll().subscribe(data => {
-      this.teams = data;
-      this.flagLoading = false;
-      this.loadingService.hide();
+      this.elements = data;
+      this.hideLoading( this.loadingService );
+
     }, err => {
-      this.flagLoading = false;
-      this.flagErrorLoading = true;
-      this.loadingService.hide();
+      this.hideLoading( this.loadingService );
+      this.showErrorMessage();
     });
     
   }

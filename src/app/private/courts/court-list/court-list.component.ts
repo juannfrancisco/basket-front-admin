@@ -1,3 +1,4 @@
+import { BaseComponent } from './../../../models/base-component';
 import { Router } from '@angular/router';
 import { LoadingService } from './../../../services/loading.service';
 import { BreadcrumbItem } from './../../../models/breadcrumb-item';
@@ -10,46 +11,49 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './court-list.component.html',
   styleUrls: ['./court-list.component.css']
 })
-export class CourtListComponent implements OnInit {
+export class CourtListComponent extends BaseComponent implements OnInit {
 
-  title:string = "Canchas";
-  breadcrumbs:BreadcrumbItem[] = [
-    {name:"Home",link:"/app"}, 
-  ];
-  courts: Court[] = [];
-  flagLoading = false;
-  flagErrorLoading = false;
+  elements: Court[] = [];
 
   constructor(
     private service: CourtsService,
     private loadingService: LoadingService,
     private router: Router
-  ) { }
+  ) {
+
+    super("Canchas",
+      [
+        { name: "Home", link: "/app" },
+      ]
+    );
+
+  }
 
   ngOnInit() {
     this.loadData();
 
   }
 
-  loadData(){
+  /**
+   * 
+   */
+  loadData() {
 
-    this.flagLoading = true;
-    this.loadingService.show();
+    this.showLoading(this.loadingService);
+
     this.service.findAll().subscribe(data => {
-      this.courts = data;
-      this.flagLoading = false;
-      this.loadingService.hide();
+      this.elements = data;
+      this.hideLoading(this.loadingService);
     }, err => {
-      this.flagLoading = false;
-      this.flagErrorLoading = true;
-      this.loadingService.hide();
+      this.hideLoading(this.loadingService);
+      this.showErrorMessage();
     });
-    
+
   }
 
 
-  edit(court:Court){
-    this.router.navigate( ['/app','courts',court.oid, 'edit'] );
+  edit(court: Court) {
+    this.router.navigate(['/app', 'courts', court.oid, 'edit']);
   }
 
 }

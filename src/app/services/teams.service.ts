@@ -24,11 +24,11 @@ export class TeamsService {
   }
 
   save( team:Team ){
-    return this.http.put( environment.endpoint +  "teams", court );
+    return this.http.put( environment.endpoint +  "teams", team );
   }
 
   update( team:Team ){
-    return this.http.post( environment.endpoint +  "teams", court );
+    return this.http.post( environment.endpoint +  "teams", team );
   }
 
 }

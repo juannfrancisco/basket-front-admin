@@ -1,3 +1,93 @@
-<p>
-  team-form works!
-</p>
+<form id="form-crear-equipo" [formGroup]="formGroup">
+
+  <div class="row">
+    <div class="col">
+
+      <div class="mb-3">
+        <div class="col-sm-12">
+          <h4>Información</h4>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Nombre</label>
+        <input type="text" class="form-control" formControlName="name" [ngClass]="classFormControl('name')" [(ngModel)]="item.name">
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Bio</label>
+        <textarea class="form-control" formControlName="bio" [ngClass]="classFormControl('bio')" [(ngModel)]="item.bio"></textarea>
+
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Nombre en URL</label>
+        <input type="text" class="form-control" formControlName="nameURL" [ngClass]="classFormControl('nameURL')" [(ngModel)]="item.nameURL">
+
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Categoria</label>
+        <select class="form-select" formControlName="category" [ngClass]="classFormControl('category')" [(ngModel)]="item.category">
+          <option value="0">Seleccione una categoria</option>
+          <option value="CADET">Cadete</option>
+          <option value="JUVENILE">Juvenil</option>
+          <option value="ADULT">Adulto</option>
+          <option value="SENIOR">Senior</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Genero</label>
+
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="gender" value="MALE"  formControlName="gender" [ngClass]="classFormControl('gender')" [(ngModel)]="item.gender">
+          <label class="form-check-label">Masculino</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="gender" value="FEMALE" formControlName="gender" [ngClass]="classFormControl('gender')" [(ngModel)]="item.gender">
+          <label class="form-check-label">Femenino</label>
+        </div>        
+      </div>
+    </div>
+
+
+    <div class="col">
+
+      <div class="mb-3">
+        <div class="col-sm-12">
+          <h4>Información de Contacto</h4>
+        </div>
+      </div>
+
+
+      <div class="mb-3">
+        <label class="form-label">Telefono</label>
+        <input type="phone" class="form-control" formControlName="phone" [ngClass]="classFormControl('phone')" [(ngModel)]="item.contact.phone">
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-control" formControlName="email" [ngClass]="classFormControl('email')" [(ngModel)]="item.contact.email">
+      </div>
+
+
+
+      <div class="mb-3">
+        <div class="col-sm-12">
+          <div class="d-grid gap-2">
+            <button class="btn btn-primary" value="button" [disabled]="formGroup.invalid || isLoading" (click)="save()" >
+              Guardar
+              <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" *ngIf="isLoading"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+
+
+</form>
