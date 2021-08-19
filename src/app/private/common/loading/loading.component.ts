@@ -19,4 +19,9 @@ export class LoadingComponent implements OnInit {
     this.showImage = this.service.showImage;
   }
 
+
+  isLoadingPage(){
+    return this.service.isLoading;
+  }
+
 }
