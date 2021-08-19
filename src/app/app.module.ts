@@ -22,6 +22,8 @@ import { TeamCreateComponent } from './private/teams/team-create/team-create.com
 import { TeamEditComponent } from './private/teams/team-edit/team-edit.component';
 import { TeamFormComponent } from './private/teams/team-form/team-form.component';
 import { TeamProfileComponent } from './private/teams/team-profile/team-profile.component';
+import { PlayerCreateComponent } from './private/players/player-create/player-create.component';
+import { PlayerFormComponent } from './private/players/player-form/player-form.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import { TeamProfileComponent } from './private/teams/team-profile/team-profile.
     TeamCreateComponent,
     TeamEditComponent,
     TeamFormComponent,
-    TeamProfileComponent
+    TeamProfileComponent,
+    PlayerCreateComponent,
+    PlayerFormComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,115 @@
+<form>
+
+
+  <div class="row">
+    <div class="col">
+
+      <div class="mb-3">
+        <h4 class="title semibold">Informacion Personal</h4>
+      </div>
+
+      <div class="mb-3">
+          <label class="form-label">Rut</label>
+          <input type="text" class="form-control">
+        </div>
+
+      <div class="mb-3">
+        <label class="form-label">Nombres</label>
+        <input type="text" class="form-control">
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Apellidos</label>
+        <input type="text" class="form-control">
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Fecha de Nacimiento</label>
+        <input type="date" class="form-control">
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Genero</label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="gender" value="MALE">
+          <label class="form-check-label">Masculino</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="gender" value="FEMALE">
+          <label class="form-check-label">Femenino</label>
+        </div>
+
+      </div>
+
+
+    </div>
+
+    <div class="col">
+
+      <div class="mb-3">
+        <h4 class="title semibold">Informacion del Jugador</h4>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Estatura</label>
+        <div class="input-group">
+          <input type="number" class="form-control">
+          <span class="input-group-text">Metros</span>
+        </div>
+      </div>
+
+
+      <div class="mb-3">
+        <label class="form-label">Peso</label>
+
+        <div class="input-group">
+          <input type="number" class="form-control">
+          <span class="input-group-text">Kilogramos</span>
+        </div>
+
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Número de Camiseta</label>
+
+        <div class="input-group">
+          <input type="number" class="form-control">
+          <span class="input-group-text">#</span>
+        </div>
+
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Posicion</label>
+
+        <select class="form-select">
+          <option value="0">Seleccione una posicion</option>
+          <option value="POINT_GUARD">POINT_GUARD</option>
+          <option value="SHOOTING_GUARD">SHOOTING_GUARD</option>
+          <option value="SMALL_FORWARD">SMALL_FORWARD</option>
+          <option value="POWER_FORWARD">POWER_FORWARD</option>
+          <option value="CENTER">CENTER</option>
+        </select>
+
+      </div>
+
+      <div class="mb-3">
+        <div class="col-sm-12">
+          <div class="d-grid gap-2">
+            <button class="btn btn-primary" value="button">
+              Guardar
+              <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" *ngIf="isLoading"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+</form>

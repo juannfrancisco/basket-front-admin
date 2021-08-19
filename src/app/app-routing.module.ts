@@ -1,3 +1,4 @@
+import { PlayerCreateComponent } from './private/players/player-create/player-create.component';
 import { TeamProfileComponent } from './private/teams/team-profile/team-profile.component';
 import { TeamEditComponent } from './private/teams/team-edit/team-edit.component';
 import { TeamCreateComponent } from './private/teams/team-create/team-create.component';
@@ -33,6 +34,8 @@ const routes: Routes = [
       {path: 'teams/create',component: TeamCreateComponent},
       {path: 'teams/:id/edit',component: TeamEditComponent},
       {path: 'teams/:id/profile',component: TeamProfileComponent},
+
+      {path: 'teams/:id/players/create',component: PlayerCreateComponent},
     ]
   },
 ];
