@@ -1,3 +1,4 @@
+import { TeamProfileComponent } from './private/teams/team-profile/team-profile.component';
 import { TeamEditComponent } from './private/teams/team-edit/team-edit.component';
 import { TeamCreateComponent } from './private/teams/team-create/team-create.component';
 import { CourtCreateComponent } from './private/courts/court-create/court-create.component';
@@ -31,6 +32,7 @@ const routes: Routes = [
       {path: 'teams',component: TeamListComponent},
       {path: 'teams/create',component: TeamCreateComponent},
       {path: 'teams/:id/edit',component: TeamEditComponent},
+      {path: 'teams/:id/profile',component: TeamProfileComponent},
     ]
   },
 ];

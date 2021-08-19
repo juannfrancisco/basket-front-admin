@@ -13,9 +13,9 @@ export class BaseComponent {
         this.breadcrumbs = breadcrumbs;
     }
 
-    showLoading(loadingService: LoadingService) {
+    showLoading(loadingService: LoadingService, showImage?:boolean) {
         this.isLoading = true;
-        loadingService.show();
+        loadingService.show( showImage );
     }
 
     hideLoading(loadingService: LoadingService) {

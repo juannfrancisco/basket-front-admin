@@ -10,11 +10,13 @@ export class LoadingComponent implements OnInit {
 
 
   isLoading:boolean = false;
+  showImage:boolean = false;
 
   constructor( private service: LoadingService ) { }
 
   ngOnInit() {
     this.isLoading = this.service.isLoading;
+    this.showImage = this.service.showImage;
   }
 
 }

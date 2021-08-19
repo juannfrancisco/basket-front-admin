@@ -6,15 +6,18 @@ import { Injectable } from '@angular/core';
 export class LoadingService {
 
   isLoading:boolean = false;
+  showImage:boolean = false;
 
   constructor() { }
 
-  show(){
+  show( showImage?:boolean ){
     this.isLoading = true;
+    this.showImage = showImage;
   }
 
   hide(){
     this.isLoading = false;
+    this.showImage = false;
   }
   
 }

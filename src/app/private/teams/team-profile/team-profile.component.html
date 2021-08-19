@@ -1,0 +1,144 @@
+<section id="main" role="main">
+  <div class="container-fluid">
+    <app-page-header [title]="title" [breadcrumbs]="breadcrumbs">
+    </app-page-header>
+
+
+    <div class="row" *ngIf="element">
+      <div class="col-md-6">
+
+        <div class="card mb-3">
+
+
+
+          <div class="card-body">
+            <div class="clearfix">
+              <h4 class="card-title float-start">Información Básica</h4>
+
+              <div class="text-end float-end">
+                <div class="btn-group btn-group-sm" role="group">
+                  <a class="btn btn-outline-primary" (click)="edit(element)">Editar Equipo</a>
+                  <a class="btn btn-outline-danger" (click)="remove(element)" >Eliminar</a>
+                </div>
+              </div>
+            </div>
+            <hr>
+
+
+
+
+            <div class="row">
+              <div class="col-md-12">
+                <b>Bio</b>
+                <p>{{element.bio}} </p>
+                <a href="#" target="_blank">Perfil Público</a>
+              </div>
+            </div>
+            <hr/>
+            <div class="row">
+              <div class="col-md-12">
+                Equipo
+                <b>{{element.category}}</b> {{element.gender}}
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card mt10">
+          <div class="card-body">
+
+
+            <div class="clearfix">
+              <h4 class="card-title float-start">Jugadores</h4>
+
+              <div class="text-end float-end">
+                <div class="btn-group btn-group-sm" role="group">
+                  <a class="btn btn-outline-primary">Nuevo Jugador</a>
+                </div>
+              </div>
+            </div>
+            <hr>
+
+            <div class="list-group">
+
+              <div class="alert alert-info mt-3" ng-show="!element.players || element.players.length==0">
+                <span class="media-text ellipsis nm">No se han asignado jugadores al equipo.</span>
+              </div>
+
+
+              <!--
+              <a class="list-group-item " ng-repeat="player in element.players | filter:q as results" href="#">
+                <span class="badge badge-number-player">{{player.number}}</span>
+                <span class="pull-left avatar mr10">
+                  <img ng-src="../image/avatar/avatar.png" class="img-rounded" alt="">
+                </span>
+                <div class="clearfix">
+                  <strong>{{player.name}} {{player.lastName}}</strong>
+                  <div>{{player.position}}</div>
+                </div>
+              </a>
+              -->
+
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-md-6">
+        <div class="card mt10">
+          <div class="card-body">
+            <h4 class="card-title">Staff Técnico</h4>
+            <div class="media-list">
+
+
+              <div class="alert alert-info mt-3">
+                <span class="media-text ellipsis nm">No se han asignado al Entrenador</span>
+              </div>
+
+
+
+              <!--
+              <a href="javascript:void(0);" class="media border-dotted" >
+                <span class="pull-left">
+                  <img src="../image/avatar/{{element.coach.image}}" class="media-object" alt="">
+                </span>
+                <span class="media-body">
+                  <span class="media-heading">{{element.coach.name}} {{element.coach.lastName}}</span>
+                  <span class="media-text ellipsis nm">{{element.coach.birthdate}}</span>
+                </span>
+              </a>
+              -->
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="row">
+      <div class="col-md-12 text-center" *ngIf="hasError">
+        <div class="card">
+          <div class="card-body">
+            <strong class="text-secondary">{{errorMessage}}</strong>
+            <div>
+              <i style="font-size:100px;color: #EBEBEB;" class=" ico-heart-broken mb20 mt20"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+  </div>
+</section>

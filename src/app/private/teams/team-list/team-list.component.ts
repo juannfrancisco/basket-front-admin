@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./team-list.component.css']
 })
 export class TeamListComponent extends BaseComponent implements OnInit {
-  
+
   elements: Team[] = []; 
 
   constructor(
@@ -46,7 +46,9 @@ export class TeamListComponent extends BaseComponent implements OnInit {
   }
 
   edit(team:Team){
-    this.router.navigate( ['/app','teams',team.oid, 'edit'] );
+    this.router.navigate( ['/app','teams',team.oid, 'profile'] );
   }
+
+  
 
 }

@@ -1,3 +1,17 @@
-<p>
-  team-edit works!
-</p>
+<section id="main" role="main" *ngIf="item" >
+    <div class="container-fluid">
+  
+      <app-page-header [title]="title" [breadcrumbs]="breadcrumbs">
+      </app-page-header>
+  
+      <div class="card">
+        <div class="card-body">
+  
+          <app-team-form [item]="item" (itemEmitter)="save($event)" ></app-team-form>
+  
+          <div *ngIf="hasError" class="alert alert-danger">{{errorMessage}}</div>
+  
+        </div>
+      </div>
+    </div>
+  </section>
