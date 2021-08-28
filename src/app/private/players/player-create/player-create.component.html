@@ -7,7 +7,7 @@
     <div class="card">
       <div class="card-body">
 
-        <app-player-form></app-player-form>
+        <app-player-form [item]="item" [isLoading]="isLoading" (itemEmitter)="save($event)"></app-player-form>
 
         <div *ngIf="hasError" class="alert alert-danger">{{errorMessage}}</div>
 

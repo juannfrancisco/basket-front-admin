@@ -1,0 +1,33 @@
+import { environment } from './../../environments/environment';
+import { Player } from './../models/player';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class PlayersService {
+
+  constructor( private http: HttpClient ) { }
+
+
+  findAll(){
+    return this.http.get<Player[]>( environment.endpoint +  "players" );
+  }
+
+  findById( oid:string ){
+    return this.http.get<Player>( environment.endpoint +  "players/" + oid );
+  }
+
+  deleteById( oid:string ){
+    return this.http.delete( environment.endpoint +  "players/" + oid );
+  }
+
+  save( player:Player ){
+    return this.http.put( environment.endpoint +  "teams/"+ player.oidCurrentTeam + "/players", player );
+  }
+
+  update( player:Player ){
+    return this.http.post( environment.endpoint +  "players", player );
+  }
+}
