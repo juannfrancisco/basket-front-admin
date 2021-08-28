@@ -33,7 +33,6 @@ export class PlayerCreateComponent extends BaseComponent implements OnInit {
   }
 
   save( player:Player ){
-    debugger;
     this.showLoading( this.loadingService );
     player.oidCurrentTeam = this.oidTeam;
     this.service.save( player ).subscribe(  

@@ -15,6 +15,11 @@ export class PlayersService {
     return this.http.get<Player[]>( environment.endpoint +  "players" );
   }
 
+  findAllByTeam( oidTeam:string ){
+    return this.http.get<Player[]>( environment.endpoint +  "teams/"+ oidTeam+"/players" );
+  }
+
+
   findById( oid:string ){
     return this.http.get<Player>( environment.endpoint +  "players/" + oid );
   }

@@ -1,3 +1,5 @@
+import { Player } from './../../../models/player';
+import { PlayersService } from './../../../services/players.service';
 import { constants } from './../../../../environments/constants';
 import { LoadingService } from './../../../services/loading.service';
 import { TeamsService } from './../../../services/teams.service';
@@ -15,9 +17,11 @@ export class TeamProfileComponent extends BaseComponent implements OnInit {
 
 
   element:Team = new Team() ;
+  players:Player[] = [];
 
   constructor(
     private service: TeamsService,
+    private servicePlayers: PlayersService,
     private loadingService:LoadingService,
     private router: Router,
     private route: ActivatedRoute) {
@@ -42,6 +46,7 @@ export class TeamProfileComponent extends BaseComponent implements OnInit {
     try{
       this.showLoading(this.loadingService, true);
       this.element = await this.service.findById(oidURL).toPromise();
+      this.players = await this.servicePlayers.findAllByTeam(oidURL).toPromise();
       this.element.gender = constants[this.element.gender];
       this.element.category = constants[this.element.category];
       this.hideLoading(this.loadingService);

@@ -8,25 +8,18 @@
       <div class="col-md-6">
 
         <div class="card mb-3">
-
-
-
           <div class="card-body">
             <div class="clearfix">
               <h4 class="card-title float-start">Información Básica</h4>
 
               <div class="text-end float-end">
                 <div class="btn-group btn-group-sm" role="group">
-                  <a class="btn btn-outline-primary" (click)="edit(element)">Editar Equipo</a>
-                  <a class="btn btn-outline-danger" (click)="remove(element)" >Eliminar</a>
+                  <a class="btn btn-outline-secondary" (click)="edit(element)">Editar Equipo</a>
+                  <a class="btn btn-outline-danger" (click)="remove(element)">Eliminar</a>
                 </div>
               </div>
             </div>
             <hr>
-
-
-
-
             <div class="row">
               <div class="col-md-12">
                 <b>Bio</b>
@@ -52,36 +45,29 @@
 
             <div class="clearfix">
               <h4 class="card-title float-start">Jugadores</h4>
-
               <div class="text-end float-end">
                 <div class="btn-group btn-group-sm" role="group">
-                  <a class="btn btn-outline-primary" [routerLink]="['/app','teams', element.oid, 'players','create']">Nuevo Jugador</a>
+                  <a class="btn btn-outline-secondary" [routerLink]="['/app','teams', element.oid, 'players','create']">Nuevo Jugador</a>
                 </div>
               </div>
             </div>
             <hr>
 
-            <div class="list-group">
-
-              <div class="alert alert-info mt-3" ng-show="!element.players || element.players.length==0">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item" *ngFor="let player of players">
+                <div class="blockquote">
+                  <span class="badge bg-secondary pr-3">{{player.number}}</span>
+                  <span class="p-2">{{player.name}} {{player.lastName}}</span>
+                </div>
+                <div class="blockquote-footer">
+                  {{player.position}}
+                </div>
+              </li>
+            </ul>
+            <div class="list-group" *ngIf="players.length == 0">
+              <div class="alert alert-secondary mt-3" ng-show="!element.players || element.players.length==0">
                 <span class="media-text ellipsis nm">No se han asignado jugadores al equipo.</span>
               </div>
-
-
-              <!--
-              <a class="list-group-item " ng-repeat="player in element.players | filter:q as results" href="#">
-                <span class="badge badge-number-player">{{player.number}}</span>
-                <span class="pull-left avatar mr10">
-                  <img ng-src="../image/avatar/avatar.png" class="img-rounded" alt="">
-                </span>
-                <div class="clearfix">
-                  <strong>{{player.name}} {{player.lastName}}</strong>
-                  <div>{{player.position}}</div>
-                </div>
-              </a>
-              -->
-
-
             </div>
 
           </div>
@@ -92,27 +78,22 @@
       <div class="col-md-6">
         <div class="card mt10">
           <div class="card-body">
-            <h4 class="card-title">Staff Técnico</h4>
+
+
+            <div class="clearfix">
+              <h4 class="card-title float-start">Staff Técnico</h4>
+              <div class="text-end float-end">
+                <div class="btn-group btn-group-sm" role="group">
+                  <a class="btn btn-outline-secondary" [routerLink]="['/app','teams', element.oid, 'staff','create']">Agregar</a>
+                </div>
+              </div>
+            </div>
+            <hr>
             <div class="media-list">
-
-
-              <div class="alert alert-info mt-3">
-                <span class="media-text ellipsis nm">No se han asignado al Entrenador</span>
+              <div class="alert alert-secondary mt-3">
+                <span class="media-text ellipsis nm">No se han asignado Staff</span>
               </div>
 
-
-
-              <!--
-              <a href="javascript:void(0);" class="media border-dotted" >
-                <span class="pull-left">
-                  <img src="../image/avatar/{{element.coach.image}}" class="media-object" alt="">
-                </span>
-                <span class="media-body">
-                  <span class="media-heading">{{element.coach.name}} {{element.coach.lastName}}</span>
-                  <span class="media-text ellipsis nm">{{element.coach.birthdate}}</span>
-                </span>
-              </a>
-              -->
             </div>
 
           </div>

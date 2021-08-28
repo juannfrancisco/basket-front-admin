@@ -39,7 +39,6 @@ export class PlayerFormComponent implements OnInit {
   }
 
   save() {
-    debugger;
     this.getFormValidationErrors();
     if (this.formGroup.valid) {
       let player = {
