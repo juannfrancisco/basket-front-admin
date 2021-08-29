@@ -24,6 +24,20 @@ import { TeamFormComponent } from './private/teams/team-form/team-form.component
 import { TeamProfileComponent } from './private/teams/team-profile/team-profile.component';
 import { PlayerCreateComponent } from './private/players/player-create/player-create.component';
 import { PlayerFormComponent } from './private/players/player-form/player-form.component';
+import { ChampionshipListComponent } from './private/championships/championship-list/championship-list.component';
+import { GameListComponent } from './private/games/game-list/game-list.component';
+import { LeagueListComponent } from './private/leagues/league-list/league-list.component';
+import { LeagueFormComponent } from './private/leagues/league-form/league-form.component';
+import { LeagueCreateComponent } from './private/leagues/league-create/league-create.component';
+import { LeagueEditComponent } from './private/leagues/league-edit/league-edit.component';
+import { GameCreateComponent } from './private/games/game-create/game-create.component';
+import { GameEditComponent } from './private/games/game-edit/game-edit.component';
+import { GameFormComponent } from './private/games/game-form/game-form.component';
+import { GameProfileComponent } from './private/games/game-profile/game-profile.component';
+import { ChampionshipCreateComponent } from './private/championships/championship-create/championship-create.component';
+import { ChampionshipEditComponent } from './private/championships/championship-edit/championship-edit.component';
+import { ChampionshipFormComponent } from './private/championships/championship-form/championship-form.component';
+import { ChampionshipProfileComponent } from './private/championships/championship-profile/championship-profile.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +60,21 @@ import { PlayerFormComponent } from './private/players/player-form/player-form.c
     TeamFormComponent,
     TeamProfileComponent,
     PlayerCreateComponent,
-    PlayerFormComponent
+    PlayerFormComponent,
+    ChampionshipListComponent,
+    GameListComponent,
+    LeagueListComponent,
+    LeagueFormComponent,
+    LeagueCreateComponent,
+    LeagueEditComponent,
+    GameCreateComponent,
+    GameEditComponent,
+    GameFormComponent,
+    GameProfileComponent,
+    ChampionshipCreateComponent,
+    ChampionshipEditComponent,
+    ChampionshipFormComponent,
+    ChampionshipProfileComponent
   ],
   imports: [
     BrowserModule,

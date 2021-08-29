@@ -1,3 +1,6 @@
+import { LeagueListComponent } from './private/leagues/league-list/league-list.component';
+import { GameListComponent } from './private/games/game-list/game-list.component';
+import { ChampionshipListComponent } from './private/championships/championship-list/championship-list.component';
 import { PlayerCreateComponent } from './private/players/player-create/player-create.component';
 import { TeamProfileComponent } from './private/teams/team-profile/team-profile.component';
 import { TeamEditComponent } from './private/teams/team-edit/team-edit.component';
@@ -34,8 +37,12 @@ const routes: Routes = [
       {path: 'teams/create',component: TeamCreateComponent},
       {path: 'teams/:id/edit',component: TeamEditComponent},
       {path: 'teams/:id/profile',component: TeamProfileComponent},
-
       {path: 'teams/:id/players/create',component: PlayerCreateComponent},
+
+      {path: 'championships',component: ChampionshipListComponent},
+
+      {path: 'games',component: GameListComponent},
+      {path: 'leagues',component: LeagueListComponent},
     ]
   },
 ];
