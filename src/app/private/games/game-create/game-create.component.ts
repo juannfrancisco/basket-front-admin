@@ -28,4 +28,8 @@ export class GameCreateComponent extends BaseComponent implements OnInit {
   ngOnInit() {
   }
 
+  save(game:Game){
+
+  }
+
 }
