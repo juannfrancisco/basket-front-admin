@@ -1,3 +1,32 @@
-<p>
-  game-form works!
-</p>
+<form id="form-crear-equipo" [formGroup]="formGroup">
+
+  <div class="row">
+    <div class="col">
+
+      <div class="mb-3">
+        <div class="col-sm-12">
+          <h4>Información</h4>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Fecha</label>
+        <input type="date" class="form-control" formControlName="date" [ngClass]="classFormControl('date')" [(ngModel)]="item.date">
+      </div>
+
+
+      <div class="mb-3">
+        <div class="col-sm-12">
+          <div class="d-grid gap-2">
+            <button class="btn btn-primary" value="button" [disabled]="formGroup.invalid || isLoading" (click)="save()">
+              Guardar
+              <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" *ngIf="isLoading"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</form>

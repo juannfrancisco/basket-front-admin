@@ -1,3 +1,18 @@
-<p>
-  game-create works!
-</p>
+<section id="main" role="main">
+    <div class="container-fluid">
+  
+      <app-page-header [title]="title" [breadcrumbs]="breadcrumbs">
+      </app-page-header>
+  
+      <div class="card">
+        <div class="card-body">
+  
+          <app-game-form [item]="item" (itemEmitter)="save($event)" ></app-game-form>
+  
+          <div *ngIf="hasError" class="alert alert-danger">{{errorMessage}}</div>
+  
+  
+        </div>
+      </div>
+    </div>
+  </section>

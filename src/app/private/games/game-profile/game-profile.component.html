@@ -7,14 +7,14 @@
       <div class="col">
         <div class="card text-white bg-dark mb-4">
           <div class="card-header text-center">
-            {{element.championship.name}}
+            {{element.championship?.name}}
           </div>
           <div class="card-body">
 
             <div class="row">
               <div class="col text-center">
                 <img src="assets/image/icons/teams-default4.png" class="card-img-top" style="width:70px;" alt="...">
-                <div class="fw-bolder">{{element.local.name}}</div>
+                <div class="fw-bolder">{{element.local?.name}}</div>
                 <div class="fs-6 fw-light lh-1 text-muted">
                   <small>LOCAL</small>
                 </div>
@@ -31,7 +31,7 @@
               </div>
               <div class="col text-center">
                 <img src="assets/image/icons/teams-default4.png" class="card-img-top" style="width:70px;" alt="...">
-                <div class="fw-bolder">{{element.visitor.name}}</div>
+                <div class="fw-bolder">{{element.visitor?.name}}</div>
                 <div class="fs-6 fw-light lh-1 text-muted">
                   <small>VISITANTE</small>
                 </div>
@@ -65,7 +65,7 @@
             </div>
             <div class="col-md-8">
               <div class="card-body">
-                <h5 class="card-title">{{element.court.name}}</h5>
+                <h5 class="card-title">{{element.court?.name}}</h5>
                 <p class="card-text">
                   <a href="https://www.google.com/maps/@-33.6145155,-70.5838623,16z">Como llegar ?</a>
                 </p>
