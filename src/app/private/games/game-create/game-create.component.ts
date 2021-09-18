@@ -44,7 +44,11 @@ export class GameCreateComponent extends BaseComponent implements OnInit {
   }
 
   save(game:Game){
-
+    this.service.save(game).subscribe( data=>{
+      console.log( "OK" );
+    }, error =>{
+      console.log( "ERROR" );
+    } )
   }
 
 }

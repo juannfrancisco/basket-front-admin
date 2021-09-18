@@ -2,7 +2,7 @@ import { Court } from './../../../models/court';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Game } from './../../../models/game';
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
-import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 import { Team } from '../../../models/team';
 
 @Component({
@@ -24,8 +24,9 @@ export class GameFormComponent implements OnInit {
   date: {year: number, month: number};
   time = {hour: 13, minute: 30};
 
+  dateObject:Date = new Date();
 
-  constructor() { }
+  constructor(private calendar: NgbCalendar) { }
 
   ngOnInit() {
 
@@ -38,6 +39,8 @@ export class GameFormComponent implements OnInit {
       court:new FormControl( this.item.court, Validators.required )
     });
 
+    this.model = this.calendar.getToday();
+
   }
 
   classFormControl(name) {
@@ -49,8 +52,20 @@ export class GameFormComponent implements OnInit {
 
 
   save(){
+    debugger;
     if( this.formGroup.valid ){
+
+      this.dateObject.setMonth(this.model.month - 1 );
+      this.dateObject.setFullYear(this.model.year);
+      this.dateObject.setDate(this.model.day);
+      this.dateObject.setHours( this.time.hour, this.time.minute );
+
+      
       let game: Game = new Game();
+      game.date = this.dateObject;
+      game.court = this.formGroup.get("court").value;
+      game.local = this.formGroup.get("local").value;
+      game.visitor = this.formGroup.get("visitor").value;
       this.itemEmitter.emit( game );
     }
     else{

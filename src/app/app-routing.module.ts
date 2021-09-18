@@ -1,3 +1,4 @@
+import { ChampionshipProfileComponent } from './private/championships/championship-profile/championship-profile.component';
 import { GameCreateComponent } from './private/games/game-create/game-create.component';
 import { GameProfileComponent } from './private/games/game-profile/game-profile.component';
 import { LeagueListComponent } from './private/leagues/league-list/league-list.component';
@@ -42,6 +43,7 @@ const routes: Routes = [
       {path: 'teams/:id/players/create',component: PlayerCreateComponent},
 
       {path: 'championships',component: ChampionshipListComponent},
+      {path: 'championships/:id/profile',component: ChampionshipProfileComponent},
 
       {path: 'games',component: GameListComponent},
       {path: 'games/:id/profile',component: GameProfileComponent},

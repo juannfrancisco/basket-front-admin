@@ -1,3 +1,4 @@
+import { ChampionshipsService } from './../../../services/championships.service';
 import { CourtsService } from './../../../services/courts.service';
 import { LoadingService } from './../../../services/loading.service';
 import { BaseComponent } from './../../../models/base-component';
@@ -16,7 +17,7 @@ export class ChampionshipListComponent extends BaseComponent implements OnInit {
 
 
   constructor(
-    private service: CourtsService,
+    private service: ChampionshipsService,
     private loadingService: LoadingService,
     private router: Router
   ) { 
@@ -28,6 +29,26 @@ export class ChampionshipListComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loadData();
+  }
+
+  loadData(){
+
+    this.showLoading( this.loadingService );
+
+    this.service.findAll().subscribe(data => {
+      this.elements = data;
+      this.hideLoading( this.loadingService );
+
+    }, err => {
+      this.hideLoading( this.loadingService );
+      this.showErrorMessage();
+    });
+    
+  }
+
+  view(e:Championship){
+    this.router.navigate( ['/app','championships',e.oid, 'profile'] );
   }
 
 }

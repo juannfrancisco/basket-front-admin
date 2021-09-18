@@ -20,7 +20,15 @@
         </div>
       </div>
   
-      <div class="row">
+      <div class="row row-cols-2 row-cols-sm-3 row-cols-md-3 row-cols-lg-4 row-cols-xl-6">
+          <div class="col" *ngFor="let e of elements">
+              <div class="card mb-3" (click)="view(e)">
+                  <img src="assets/image/icons/teams-default4.png" class="card-img-top" alt="...">
+                  <div class="card-body">
+                      <h6 class="card-title">{{e.name}}</h6>
+                  </div>
+              </div>
+          </div>
       </div>
   
   

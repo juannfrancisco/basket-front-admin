@@ -27,7 +27,7 @@
             <label class="form-label">Local</label>
             <select class="form-select" formControlName="local" [ngClass]="classFormControl('local')" [(ngModel)]="item.local">
               <option>Seleccionar</option>
-              <option value="{{e.oid}}" *ngFor="let e of teams">{{e.name}}</option>
+              <option [ngValue]="e" *ngFor="let e of teams">{{e.name}}</option>
             </select>
           </div>
         </div>
@@ -37,7 +37,7 @@
             <label class="form-label">Visitante</label>
             <select class="form-select" formControlName="visitor" [ngClass]="classFormControl('visitor')" [(ngModel)]="item.visitor">
               <option>Seleccionar</option>
-              <option value="{{e.oid}}" *ngFor="let e of teams">{{e.name}}</option>
+              <option [ngValue]="e" *ngFor="let e of teams">{{e.name}}</option>
             </select>
           </div>
         </div>
@@ -51,7 +51,7 @@
         <label class="form-label">Cancha</label>
         <select class="form-select" formControlName="court" [ngClass]="classFormControl('court')" [(ngModel)]="item.court">
           <option>Seleccionar</option>
-          <option value="{{e.oid}}" *ngFor="let e of courts">{{e.name}}</option>
+          <option [ngValue]="e" *ngFor="let e of courts">{{e.name}}</option>
         </select>
       </div>
 
@@ -70,7 +70,7 @@
 
     </div>
     <div class="col-12 col-md-6">
-
+        {{dateObject | date}} a las {{dateObject | date :'HH:mm'}}
     </div>
   </div>
 </form>
