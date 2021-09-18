@@ -38,6 +38,8 @@ import { ChampionshipCreateComponent } from './private/championships/championshi
 import { ChampionshipEditComponent } from './private/championships/championship-edit/championship-edit.component';
 import { ChampionshipFormComponent } from './private/championships/championship-form/championship-form.component';
 import { ChampionshipProfileComponent } from './private/championships/championship-profile/championship-profile.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 
 @NgModule({
   declarations: [
@@ -81,7 +83,8 @@ import { ChampionshipProfileComponent } from './private/championships/championsh
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

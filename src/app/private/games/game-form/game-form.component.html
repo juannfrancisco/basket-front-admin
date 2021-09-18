@@ -1,17 +1,58 @@
 <form id="form-crear-equipo" [formGroup]="formGroup">
 
   <div class="row">
-    <div class="col">
+    <div class="col-12 col-md-6">
 
       <div class="mb-3">
-        <div class="col-sm-12">
-          <h4>Información</h4>
-        </div>
+        <h4>Información</h4>
       </div>
 
       <div class="mb-3">
-        <label class="form-label">Fecha</label>
-        <input type="date" class="form-control" formControlName="date" [ngClass]="classFormControl('date')" [(ngModel)]="item.date">
+        <label class="form-label">Fecha y Hora</label>
+        <div class="input-group">
+          <input class="form-control" placeholder="yyyy-mm-dd" name="datex" formControlName="datex" [(ngModel)]="model" ngbDatepicker
+            #d="ngbDatepicker">
+          <button class="btn btn-outline-secondary" type="button" (click)="d.toggle()">
+            <i class="bi bi-calendar-check-fill"></i>
+          </button>
+        </div>
+      </div>
+
+      <ngb-timepicker [(ngModel)]="time" name="time" formControlName="time"></ngb-timepicker>
+
+      <div class="row">
+        <div class="col-12 col-md-6">
+
+          <div class="mb-3">
+            <label class="form-label">Local</label>
+            <select class="form-select" formControlName="local" [ngClass]="classFormControl('local')" [(ngModel)]="item.local">
+              <option>Seleccionar</option>
+              <option value="{{e.oid}}" *ngFor="let e of teams">{{e.name}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+
+          <div class="mb-3">
+            <label class="form-label">Visitante</label>
+            <select class="form-select" formControlName="visitor" [ngClass]="classFormControl('visitor')" [(ngModel)]="item.visitor">
+              <option>Seleccionar</option>
+              <option value="{{e.oid}}" *ngFor="let e of teams">{{e.name}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+      <div class="mb-3">
+        <label class="form-label">Cancha</label>
+        <select class="form-select" formControlName="court" [ngClass]="classFormControl('court')" [(ngModel)]="item.court">
+          <option>Seleccionar</option>
+          <option value="{{e.oid}}" *ngFor="let e of courts">{{e.name}}</option>
+        </select>
       </div>
 
 
@@ -26,6 +67,9 @@
         </div>
       </div>
 
+
+    </div>
+    <div class="col-12 col-md-6">
 
     </div>
   </div>

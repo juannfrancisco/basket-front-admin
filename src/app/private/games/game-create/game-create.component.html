@@ -7,7 +7,11 @@
       <div class="card">
         <div class="card-body">
   
-          <app-game-form [item]="item" (itemEmitter)="save($event)" ></app-game-form>
+          <app-game-form 
+          [item]="item" 
+          [courts]="courts"
+          [teams]="teams"
+          (itemEmitter)="save($event)" ></app-game-form>
   
           <div *ngIf="hasError" class="alert alert-danger">{{errorMessage}}</div>
   
