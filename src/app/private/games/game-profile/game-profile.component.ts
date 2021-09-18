@@ -13,6 +13,7 @@ import { Component, OnInit } from '@angular/core';
 export class GameProfileComponent extends BaseComponent implements OnInit {
 
   element:Game = new Game() ;
+  oidChampionship: string;
 
   constructor(
     private service: GamesService,
@@ -22,12 +23,17 @@ export class GameProfileComponent extends BaseComponent implements OnInit {
 
     super("Partido", [
       { name: "Home", link: "/app" },
-      { name: "Partidos", link: "/app/games" }
+      { name: "Campeonatos", link: "/app/championships" }
     ]);
   }
 
   ngOnInit() {
     let oidURL = this.route.snapshot.paramMap.get('id');
+    debugger;
+    this.oidChampionship = this.route.snapshot.paramMap.get('idChampionship');
+
+    this.breadcrumbs.push( {name:'..',link:'/app/championships/'+this.oidChampionship + "/profile" } );
+    this.breadcrumbs.push( {name:'Partidos',link:'/app/championships/'+this.oidChampionship + "/games" } );
     this.findById( oidURL );
   }
 

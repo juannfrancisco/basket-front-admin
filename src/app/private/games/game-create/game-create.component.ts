@@ -1,8 +1,9 @@
+import { Championship } from './../../../models/championship';
 import { Court } from './../../../models/court';
 import { Team } from './../../../models/team';
 import { TeamsService } from './../../../services/teams.service';
 import { CourtsService } from './../../../services/courts.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { LoadingService } from './../../../services/loading.service';
 import { GamesService } from './../../../services/games.service';
 import { Game } from './../../../models/game';
@@ -17,38 +18,49 @@ import { Component, OnInit } from '@angular/core';
 export class GameCreateComponent extends BaseComponent implements OnInit {
 
   item: Game = new Game();
-  teams : Team[] = [];
-  courts : Court[] = [];
+  teams: Team[] = [];
+  courts: Court[] = [];
+  oidChampionship: string;
 
-  constructor( 
+  constructor(
     private service: GamesService,
     private courtService: CourtsService,
-    private teamsService:TeamsService,
-    private loadingService:LoadingService,
-    private router: Router) {
-    
-      super( "Nuevo Partido", [
-        { name: "Home", link: "/app" },
-        { name: "Partidos", link: "/app/games" },
-      ] );
-   }
+    private teamsService: TeamsService,
+    private loadingService: LoadingService,
+    private router: Router,
+    private route: ActivatedRoute) {
+
+    super("Nuevo Partido", [
+      { name: "Home", link: "/app" },
+      { name: "Campeonatos", link: "/app/championships" },
+    ]);
+  }
 
   ngOnInit() {
+    this.oidChampionship = this.route.snapshot.paramMap.get('idChampionship');
+    this.breadcrumbs.push( {name:'..',link:'/app/championships/'+this.oidChampionship + "/profile" } );
+    this.breadcrumbs.push( {name:'Partidos',link:'/app/championships/'+this.oidChampionship + "/games" } );
     this.loadData();
   }
 
 
-  async loadData(){
+  async loadData() {
     this.courts = await this.courtService.findAll().toPromise();
     this.teams = await this.teamsService.findAll().toPromise();
   }
 
-  save(game:Game){
-    this.service.save(game).subscribe( data=>{
-      console.log( "OK" );
-    }, error =>{
-      console.log( "ERROR" );
-    } )
+  save(game: Game) {
+    game.championship = new Championship();
+    game.championship.oid = this.oidChampionship;
+    this.showLoading(this.loadingService);
+
+    this.service.save(game).subscribe(data => {
+      this.hideLoading(this.loadingService);
+      this.router.navigate(["/app","championships",this.oidChampionship,"games"]);
+    }, error => {
+      this.hideLoading(this.loadingService);
+      this.showErrorMessage();
+    })
   }
 
 }

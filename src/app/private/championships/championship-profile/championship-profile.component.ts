@@ -13,6 +13,7 @@ import { Component, OnInit } from '@angular/core';
 export class ChampionshipProfileComponent extends BaseComponent implements OnInit {
 
   element:Championship = new Championship() ;
+  oid:string;
 
   constructor(
     private service: ChampionshipsService,
@@ -27,15 +28,15 @@ export class ChampionshipProfileComponent extends BaseComponent implements OnIni
   }
 
   ngOnInit() {
-    let oidURL = this.route.snapshot.paramMap.get('id');
-    this.findById( oidURL );
+    this.oid = this.route.snapshot.paramMap.get('id');
+    this.findById( this.oid );
   }
 
    /**
    * 
    * @param oidURL 
    */
-  async findById( oidURL ){
+  async findById( oidURL:string ){
     try{
       this.showLoading(this.loadingService, true);
       this.element = await this.service.findById(oidURL).toPromise();            
@@ -46,5 +47,11 @@ export class ChampionshipProfileComponent extends BaseComponent implements OnIni
       this.showErrorMessage();
     }
   }
+
+  goTo( view:string ){
+    this.router.navigate( ['/app','championships',this.oid, view ] );
+  }
+
+
 
 }

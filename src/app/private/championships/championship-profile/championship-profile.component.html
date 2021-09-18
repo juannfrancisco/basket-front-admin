@@ -4,35 +4,35 @@
     </app-page-header>
 
     <div class="row" *ngIf="element">
-      <div class="col-xs-6 col-sm-4 col-md-2 text-center mb-3">
+      <div class="col-xs-6 col-sm-4 col-md-2 text-center mb-3" (click)="goTo('players')" >
         <div class="card">
           <img src="assets/image/icons/basket-championship-b.png" class="card-img-top" alt="...">
           <h5 class="card-title">Jugadores</h5>
         </div>
       </div>
 
-      <div class="col-xs-6 col-sm-4 col-md-2 text-center mb-3">
+      <div class="col-xs-6 col-sm-4 col-md-2 text-center mb-3" (click)="goTo('teams')">
         <div class="card">
           <img src="assets/image/icons/basket-club-b.png" class="card-img-top" alt="...">
           <h5 class="card-title">Equipos</h5>
         </div>
       </div>
 
-      <div class="col-xs-6 col-sm-4 col-md-2 text-center mb-3">
+      <div class="col-xs-6 col-sm-4 col-md-2 text-center mb-3" (click)="goTo('games')">
         <div class="card ">
           <img src="assets/image/icons/basket-college-league-b.png" class="card-img-top" alt="...">
           <h5 class="card-title">Partidos</h5>
         </div>
       </div>
 
-      <div class="col-xs-6 col-sm-4 col-md-2 text-center mb-3">
+      <div class="col-xs-6 col-sm-4 col-md-2 text-center mb-3" (click)="goTo('referees')" >
         <div class="card ">
           <img src="assets/image/icons/basket-tournament-b.png" class="card-img-top" alt="...">
           <h5 class="card-title">Arbitros</h5>
         </div>
       </div>
 
-      <div class="col-xs-6 col-sm-4 col-md-2 text-center mb-3">
+      <div class="col-xs-6 col-sm-4 col-md-2 text-center mb-3" (click)="goTo('courts')">
         <div class="card">
           <img src="assets/image/icons/basket-tournament-b.png" class="card-img-top" alt="...">
           <h5 class="card-title">Canchas</h5>

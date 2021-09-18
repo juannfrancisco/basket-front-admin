@@ -21,21 +21,21 @@
       </div>
     </div>
 
-    <div class="row">
+    <div class="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-1 row-cols-xl-2">
       <div class="col" *ngFor="let e of elements">
         <div class="card mb-3" (click)="edit(e)">
           <div class="card-header text-center">
             <i class="bi bi-calendar2-date-fill"></i>
-            {{e.date | date}}
-            <i class="bi bi-clock-fill"></i>
-            {{e.date | date :'HH:mm'}}
+            {{e.date | date}} a las {{e.date | date :'HH:mm'}}
           </div>
           <div class="card-body">
             <div class="row">
               <div class="col text-center">
                 <img src="assets/image/icons/teams-default4.png" class="card-img-top" style="width:70px;" alt="...">
                 <div class="fw-bolder">{{e.local.name}}</div>
-                <div class="fs-6 fw-light lh-1 text-muted">LOCAL</div>
+                <div class="fs-6 fw-light lh-1 text-muted">
+                  <small>LOCAL</small>
+                </div>
               </div>
               <div class="col text-center">
                 <div style="padding-top: 20px">
@@ -50,7 +50,9 @@
               <div class="col text-center">
                 <img src="assets/image/icons/teams-default4.png" class="card-img-top" style="width:70px;" alt="...">
                 <div class="fw-bolder">{{e.visitor.name}}</div>
-                <div class="fs-6 fw-light lh-1 text-muted">VISITANTE</div>
+                <div class="fs-6 fw-light lh-1 text-muted">
+                  <small>VISITANTE</small>
+                </div>
               </div>
             </div>
           </div>

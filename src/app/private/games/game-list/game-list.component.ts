@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { LoadingService } from './../../../services/loading.service';
 import { GamesService } from './../../../services/games.service';
 import { Game } from './../../../models/game';
@@ -14,18 +14,23 @@ import { Component, OnInit } from '@angular/core';
 export class GameListComponent extends BaseComponent implements OnInit {
 
   elements: Game[] = []; 
+  oidChampionship: string;
 
   constructor(
     private service: GamesService,
     private loadingService: LoadingService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     super("Partidos",[
       {name:"Home",link:"/app"}, 
+      {name:"Campeonatos",link:"/app/championships"}
     ]);
    }
 
   ngOnInit() {
+    this.oidChampionship = this.route.snapshot.paramMap.get('idChampionship');
+    this.breadcrumbs.push( {name:'..',link:'/app/championships/'+this.oidChampionship + "/profile" } );
     this.loadData();
   }
 
@@ -46,7 +51,7 @@ export class GameListComponent extends BaseComponent implements OnInit {
   }
 
   edit(team:Team){
-    this.router.navigate( ['/app','games',team.oid, 'profile'] );
+    this.router.navigate( ['/app', 'championships', this.oidChampionship, 'games',team.oid, 'profile'] );
   }
 
 }
