@@ -39,6 +39,7 @@ import { ChampionshipEditComponent } from './private/championships/championship-
 import { ChampionshipFormComponent } from './private/championships/championship-form/championship-form.component';
 import { ChampionshipProfileComponent } from './private/championships/championship-profile/championship-profile.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { GameModalFinalizeComponent } from './private/games/game-modal-finalize/game-modal-finalize.component';
 
 
 @NgModule({
@@ -76,7 +77,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     ChampionshipCreateComponent,
     ChampionshipEditComponent,
     ChampionshipFormComponent,
-    ChampionshipProfileComponent
+    ChampionshipProfileComponent,
+    GameModalFinalizeComponent
   ],
   imports: [
     BrowserModule,

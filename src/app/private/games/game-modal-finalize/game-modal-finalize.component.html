@@ -1,0 +1,39 @@
+<div class="modal-header">
+    <h5 class="modal-title">Finalizar Encuentro</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="close()" aria-label="Close"></button>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-5 text-center">
+            <img src="assets/image/icons/teams-default4.png" class="card-img-top" style="width:70px;" alt="...">
+            <div class="fw-bolder">{{local?.name}}</div>
+            <div class="fs-6 fw-light lh-1 text-muted">
+                <small>LOCAL</small>
+            </div>
+            <div class="mb-3 mt-3">
+                <label for="exampleFormControlInput1" class="form-label">Score</label>
+                <input type="number" class="form-control" id="scoreLocal" placeholder="000" required [(ngModel)]="scoreLocal">
+            </div>
+        </div>
+        <div class="col-2 text-center mt-4">
+            v/s
+        </div>
+
+        <div class="col-5 text-center">
+            <img src="assets/image/icons/teams-default4.png" class="card-img-top" style="width:70px;" alt="...">
+            <div class="fw-bolder">{{visitor?.name}}</div>
+            <div class="fs-6 fw-light lh-1 text-muted">
+                <small>VISITANTE</small>
+            </div>
+            <div class="mb-3 mt-3">
+                <label for="exampleFormControlInput1" class="form-label">Score</label>
+                <input type="number" class="form-control" id="scoreVisitor" placeholder="000" required [(ngModel)]="scoreVisitor">
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="close()">Salir</button>
+    <button type="button" class="btn btn-primary" (click)="save()">Guardar</button>
+</div>

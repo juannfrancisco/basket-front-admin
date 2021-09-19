@@ -1,9 +1,12 @@
+import { Championship } from './../../../models/championship';
+import { GameModalFinalizeComponent } from './../game-modal-finalize/game-modal-finalize.component';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoadingService } from './../../../services/loading.service';
 import { GamesService } from './../../../services/games.service';
 import { Game } from './../../../models/game';
 import { BaseComponent } from './../../../models/base-component';
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-game-profile',
@@ -18,6 +21,7 @@ export class GameProfileComponent extends BaseComponent implements OnInit {
   constructor(
     private service: GamesService,
     private loadingService:LoadingService,
+    private modalService: NgbModal,  
     private router: Router,
     private route: ActivatedRoute) {
 
@@ -29,7 +33,6 @@ export class GameProfileComponent extends BaseComponent implements OnInit {
 
   ngOnInit() {
     let oidURL = this.route.snapshot.paramMap.get('id');
-    debugger;
     this.oidChampionship = this.route.snapshot.paramMap.get('idChampionship');
 
     this.breadcrumbs.push( {name:'..',link:'/app/championships/'+this.oidChampionship + "/profile" } );
@@ -51,6 +54,13 @@ export class GameProfileComponent extends BaseComponent implements OnInit {
       this.hideLoading(this.loadingService);
       this.showErrorMessage();
     }
+  }
+
+  finalize(){
+    const modalRef = this.modalService.open(GameModalFinalizeComponent); //,{ size: 'lg' }
+    modalRef.componentInstance.local = this.element.local;
+    modalRef.componentInstance.visitor = this.element.visitor;
+    modalRef.componentInstance.game = this.element;
   }
 
 }
