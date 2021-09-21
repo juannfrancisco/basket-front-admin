@@ -15,6 +15,8 @@ export class TeamFormComponent implements OnInit {
   @Input() isLoading:boolean;
   @Output() itemEmitter = new EventEmitter<Team>();
   
+  nameURL:string;
+
   formGroup:FormGroup;
 
   constructor() { }
@@ -42,8 +44,17 @@ export class TeamFormComponent implements OnInit {
     }
   }
 
+  test(){
+    let url:string = this.item.name.toLowerCase();
+    url = url.replace(/[^a-zA-Z ]/g, "");
+    url = url.replace(new RegExp(" ", 'g') , "-");
+    //this.item.nameURL = this.item.nameURL ? this.item.nameURL : encodeURIComponent(url);
+    this.item.nameURL = encodeURIComponent(url);
+    //this.nameURL = encodeURIComponent(url);
+  }
 
   save(){
+   
     if( this.formGroup.valid ){
       let team: Team = {
         oid: "",

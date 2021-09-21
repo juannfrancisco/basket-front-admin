@@ -1,0 +1,28 @@
+<div class="modal-header">
+    <h5 class="modal-title">Formación {{team.name}} </h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<div class="modal-body">
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item" *ngFor="let player of team?.players">
+            <div class="row">
+                <div class="col-1">
+                    <span class="badge bg-secondary pr-3">{{player.number}}</span>
+                </div>
+                <div class="col-11">
+                    <div>
+                        {{player.name}} {{player.lastName}}
+                    </div>
+                    <div class="text-muted">
+                        <small>{{player.position}}</small>
+                    </div>
+
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Salir</button>
+    <button type="button" class="btn btn-primary">Guardar</button>
+</div>

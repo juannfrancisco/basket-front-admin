@@ -1,0 +1,79 @@
+import { GameModalPlayingCrewComponent } from './../game-modal-playing-crew/game-modal-playing-crew.component';
+import { PlayersService } from './../../../services/players.service';
+import { TeamsService } from './../../../services/teams.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { LoadingService } from './../../../services/loading.service';
+import { GamesService } from './../../../services/games.service';
+import { Game } from './../../../models/game';
+import { BaseComponent } from './../../../models/base-component';
+import { Component, OnInit } from '@angular/core';
+import { constants } from '../../../../environments/constants';
+
+@Component({
+  selector: 'app-game-playing',
+  templateUrl: './game-playing.component.html',
+  styleUrls: ['./game-playing.component.css']
+})
+export class GamePlayingComponent extends BaseComponent implements OnInit {
+
+  element:Game = new Game() ;
+  oidChampionship: string;
+
+  constructor(
+    private service: GamesService,
+    private servicePlayers: PlayersService,
+    private loadingService:LoadingService,
+    private modalService: NgbModal,  
+    private router: Router,
+    private route: ActivatedRoute) {
+
+    super("Partido", [
+      { name: "Home", link: "/app" },
+      { name: "Campeonatos", link: "/app/championships" }
+    ]);
+  }
+
+  ngOnInit() {
+    let oidURL = this.route.snapshot.paramMap.get('id');
+    this.oidChampionship = this.route.snapshot.paramMap.get('idChampionship');
+
+    this.breadcrumbs.push( {name:'..',link:'/app/championships/'+this.oidChampionship + "/profile" } );
+    this.breadcrumbs.push( {name:'Partidos',link:'/app/championships/'+this.oidChampionship + "/games" } );
+    this.findById( oidURL );
+  }
+
+   /**
+   * 
+   * @param oidURL 
+   */
+  async findById( oidURL ){
+    try{
+      this.showLoading(this.loadingService, true);
+      this.element = await this.service.findById(oidURL).toPromise();
+      this.element.local.players = await this.servicePlayers.findAllByTeam( this.element.local.oid ).toPromise();
+      this.element.visitor.players = await this.servicePlayers.findAllByTeam( this.element.visitor.oid ).toPromise();
+
+      this.element.local.players.forEach( player => {
+        player.position = constants[player.position];
+      } );
+      this.element.visitor.players.forEach( player => {
+        player.position = constants[player.position];
+      } );
+
+      this.hideLoading(this.loadingService);
+      this.title = this.element.local.name + " v/s " + this.element.visitor.name;
+    }catch(e){
+      this.hideLoading(this.loadingService);
+      this.showErrorMessage();
+    }
+  }
+
+
+  formacion( crew:string ){
+    const modalRef = this.modalService.open(GameModalPlayingCrewComponent); //,{ size: 'lg' }
+    modalRef.componentInstance.team = this.element[crew];
+    
+  }
+
+}

@@ -1,3 +1,4 @@
+import { GamePlayingComponent } from './private/games/game-playing/game-playing.component';
 import { ChampionshipProfileComponent } from './private/championships/championship-profile/championship-profile.component';
 import { GameCreateComponent } from './private/games/game-create/game-create.component';
 import { GameProfileComponent } from './private/games/game-profile/game-profile.component';
@@ -48,6 +49,7 @@ const routes: Routes = [
       {path: 'championships/:idChampionship/games',component: GameListComponent},
       {path: 'championships/:idChampionship/games/:id/profile',component: GameProfileComponent},
       {path: 'championships/:idChampionship/games/create',component: GameCreateComponent},
+      {path: 'championships/:idChampionship/games/:id/playing',component: GamePlayingComponent},
 
       {path: 'championships/:idChampionship/teams',component: TeamListComponent},
       {path: 'championships/:idChampionship/teams/create',component: TeamCreateComponent},

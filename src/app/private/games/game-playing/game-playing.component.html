@@ -1,0 +1,143 @@
+<section id="main" role="main">
+    <div class="container-fluid">
+        <app-page-header [title]="title" [breadcrumbs]="breadcrumbs">
+        </app-page-header>
+
+        <div class="row" *ngIf="element">
+            <div class="col">
+                <div class="card text-white bg-dark mb-4">
+                    <div class="card-header text-center">
+                        {{element.championship?.name}}
+                    </div>
+                    <div class="card-body">
+
+                        <div class="row">
+                            <div class="col text-center">
+                                <img src="assets/image/icons/teams-default4.png" class="card-img-top" style="width:70px;" alt="...">
+                                <div class="fw-bolder">{{element.local?.name}}</div>
+                                <div class="fs-6 fw-light lh-1 text-muted">
+                                    <small>LOCAL</small>
+                                </div>
+                            </div>
+                            <div class="col text-center">
+                                <div style="padding-top: 20px">
+                                    <span class="fs-2 p-4 font-monospace">{{element.scoreLocal}}</span>
+                                    <span class="text-muted">v/s</span>
+                                    <span class="fs-2 p-4 font-monospace">{{element.scoreVisitor}}</span>
+                                </div>
+                                <div [ngSwitch]="element.state">
+                                    <span *ngSwitchCase="'PENDING'">PENDIENTE</span>
+                                    <span *ngSwitchCase="'IN_PROGRESS'">EN PROGRESO</span>
+                                    <span *ngSwitchCase="'FINALIZED'">FINAL</span>
+                                    <span *ngSwitchDefault>...</span>
+                                </div>
+                            </div>
+                            <div class="col text-center">
+                                <img src="assets/image/icons/teams-default4.png" class="card-img-top" style="width:70px;" alt="...">
+                                <div class="fw-bolder">{{element.visitor?.name}}</div>
+                                <div class="fs-6 fw-light lh-1 text-muted">
+                                    <small>VISITANTE</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-6 col-sm-6">
+
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-success btn-sm" (click)="formacion('local')" >
+                                <i class="bi bi-justify"></i>
+                                Formación
+                            </button>
+                            <button type="button" class="btn btn-secondary btn-sm">
+                                <i class="bi bi-stopwatch"></i>
+                                Minuto
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert alert-warning mt20 ml10 mr10 text-center">
+                            <span class="media-text ellipsis nm">No se han asignado jugadores a la formación.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="list-group ma15">
+                    <div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item" *ngFor="let player of element.local?.players">
+                                <div class="row">
+                                    <div class="col-1">
+                                        <span class="badge bg-secondary pr-3">{{player.number}}</span>
+                                    </div>
+                                    <div class="col-11">
+                                        <div>
+                                            {{player.name}} {{player.lastName}}
+                                        </div>
+                                        <div class="text-muted">
+                                            <small>{{player.position}}</small>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-success btn-sm" (click)="formacion('visitor')" >
+                                <i class="bi bi-justify"></i>
+                                Formación
+                            </button>
+                            <button type="button" class="btn btn-secondary btn-sm">
+                                <i class="bi bi-stopwatch"></i>
+                                Minuto
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert alert-warning mt20 ml10 mr10 text-center">
+                            <span class="media-text ellipsis nm">No se han asignado jugadores a la formación.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-group ma15">
+                    <div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item" *ngFor="let player of element.visitor?.players">
+                                <div class="row">
+                                    <div class="col-1">
+                                        <span class="badge bg-secondary pr-3">{{player.number}}</span>
+                                    </div>
+                                    <div class="col-11">
+                                        <div>
+                                            {{player.name}} {{player.lastName}}
+                                        </div>
+                                        <div class="text-muted">
+                                            <small>{{player.position}}</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+</section>

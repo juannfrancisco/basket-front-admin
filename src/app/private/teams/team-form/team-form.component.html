@@ -11,7 +11,7 @@
 
       <div class="mb-3">
         <label class="form-label">Nombre</label>
-        <input type="text" class="form-control" formControlName="name" [ngClass]="classFormControl('name')" [(ngModel)]="item.name">
+        <input type="text" class="form-control" (change)="test()" formControlName="name" [ngClass]="classFormControl('name')" [(ngModel)]="item.name">
       </div>
 
       <div class="mb-3">
@@ -23,7 +23,6 @@
       <div class="mb-3">
         <label class="form-label">Nombre en URL</label>
         <input type="text" class="form-control" formControlName="nameURL" [ngClass]="classFormControl('nameURL')" [(ngModel)]="item.nameURL">
-
       </div>
 
       <div class="mb-3">
