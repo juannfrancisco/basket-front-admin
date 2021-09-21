@@ -18,6 +18,8 @@ export class TeamProfileComponent extends BaseComponent implements OnInit {
 
   element:Team = new Team() ;
   players:Player[] = [];
+  oidURL:string;
+  oidChampionship: string;
 
   constructor(
     private service: TeamsService,
@@ -28,13 +30,18 @@ export class TeamProfileComponent extends BaseComponent implements OnInit {
 
     super("Equipo", [
       { name: "Home", link: "/app" },
-      { name: "Equipos", link: "/app/teams" }
+      { name: "Campeonatos", link: "/app/championships" }      
     ]);
   }
 
   ngOnInit() {
-    let oidURL = this.route.snapshot.paramMap.get('id');
-    this.findById( oidURL );
+    this.oidChampionship = this.route.snapshot.paramMap.get('idChampionship');
+    this.oidURL = this.route.snapshot.paramMap.get('id');
+    
+    this.breadcrumbs.push( { name:'..', link:'/app/championships/'+this.oidChampionship+ '/profile'} );
+    this.breadcrumbs.push({ name: "Equipos", link: '/app/championships/'+this.oidChampionship+ '/teams' });
+
+    this.findById( this.oidURL );
   }
 
 
@@ -47,6 +54,9 @@ export class TeamProfileComponent extends BaseComponent implements OnInit {
       this.showLoading(this.loadingService, true);
       this.element = await this.service.findById(oidURL).toPromise();
       this.players = await this.servicePlayers.findAllByTeam(oidURL).toPromise();
+      this.players.forEach( player =>{
+        player.position = constants[player.position];
+      } )
       this.element.gender = constants[this.element.gender];
       this.element.category = constants[this.element.category];
       this.hideLoading(this.loadingService);

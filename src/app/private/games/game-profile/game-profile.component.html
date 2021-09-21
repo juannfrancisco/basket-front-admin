@@ -25,8 +25,11 @@
                   <span class="text-muted">v/s</span>
                   <span class="fs-2 p-4 font-monospace">{{element.scoreVisitor}}</span>
                 </div>
-                <div>
-                  {{element.state}}
+                <div [ngSwitch]="element.state">
+                  <span *ngSwitchCase="'PENDING'">PENDIENTE</span>
+                  <span *ngSwitchCase="'IN_PROGRESS'">EN PROGRESO</span>
+                  <span *ngSwitchCase="'FINALIZED'">FINAL</span>
+                  <span *ngSwitchDefault>...</span>
                 </div>
               </div>
               <div class="col text-center">

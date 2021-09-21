@@ -44,9 +44,20 @@ const routes: Routes = [
 
       {path: 'championships',component: ChampionshipListComponent},
       {path: 'championships/:id/profile',component: ChampionshipProfileComponent},
+      
       {path: 'championships/:idChampionship/games',component: GameListComponent},
       {path: 'championships/:idChampionship/games/:id/profile',component: GameProfileComponent},
       {path: 'championships/:idChampionship/games/create',component: GameCreateComponent},
+
+      {path: 'championships/:idChampionship/teams',component: TeamListComponent},
+      {path: 'championships/:idChampionship/teams/create',component: TeamCreateComponent},
+      {path: 'championships/:idChampionship/teams/:id/edit',component: TeamEditComponent},
+      {path: 'championships/:idChampionship/teams/:id/profile',component: TeamProfileComponent},
+      {path: 'championships/:idChampionship/teams/:id/players/create',component: PlayerCreateComponent},
+
+
+
+
 
       {path: 'games',component: GameListComponent},
       {path: 'games/:id/profile',component: GameProfileComponent},

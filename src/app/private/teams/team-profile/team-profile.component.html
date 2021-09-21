@@ -37,46 +37,8 @@
 
           </div>
         </div>
-      </div>
-      <div class="col-md-6">
-        <div class="card mt10">
-          <div class="card-body">
 
-
-            <div class="clearfix">
-              <h4 class="card-title float-start">Jugadores</h4>
-              <div class="text-end float-end">
-                <div class="btn-group btn-group-sm" role="group">
-                  <a class="btn btn-outline-secondary" [routerLink]="['/app','teams', element.oid, 'players','create']">Nuevo Jugador</a>
-                </div>
-              </div>
-            </div>
-            <hr>
-
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item" *ngFor="let player of players">
-                <div class="blockquote">
-                  <span class="badge bg-secondary pr-3">{{player.number}}</span>
-                  <span class="p-2">{{player.name}} {{player.lastName}}</span>
-                </div>
-                <div class="blockquote-footer">
-                  {{player.position}}
-                </div>
-              </li>
-            </ul>
-            <div class="list-group" *ngIf="players.length == 0">
-              <div class="alert alert-secondary mt-3" ng-show="!element.players || element.players.length==0">
-                <span class="media-text ellipsis nm">No se han asignado jugadores al equipo.</span>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-
-      <div class="col-md-6">
-        <div class="card mt10">
+        <div class="card mt10 mb-3">
           <div class="card-body">
 
 
@@ -98,6 +60,54 @@
 
           </div>
         </div>
+
+      </div>
+      <div class="col-md-6">
+        <div class="card mt10">
+          <div class="card-body">
+
+
+            <div class="clearfix">
+              <h4 class="card-title float-start">Jugadores</h4>
+              <div class="text-end float-end">
+                <div class="btn-group btn-group-sm" role="group">
+                  <a class="btn btn-outline-secondary" [routerLink]="['/app','teams', element.oid, 'players','create']">Nuevo Jugador</a>
+                </div>
+              </div>
+            </div>
+            <hr>
+
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item" *ngFor="let player of players">
+                <div class="row" >
+                  <div class="col-1" >
+                    <span class="badge bg-secondary pr-3">{{player.number}}</span>
+                  </div>
+                  <div class="col-11" >
+                    <div>
+                      {{player.name}} {{player.lastName}}
+                    </div>
+                    <div class="text-muted" >
+                        <small>{{player.position}}</small>
+                    </div>
+
+                  </div>
+                </div>
+              </li>
+            </ul>
+            <div class="list-group" *ngIf="players.length == 0">
+              <div class="alert alert-secondary mt-3" ng-show="!element.players || element.players.length==0">
+                <span class="media-text ellipsis nm">No se han asignado jugadores al equipo.</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-md-6">
+        
       </div>
     </div>
 

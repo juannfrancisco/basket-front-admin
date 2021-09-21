@@ -13,6 +13,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class TeamEditComponent extends BaseComponent implements OnInit {
 
   item:Team;
+  oidURL :string;
 
   constructor( 
     private service: TeamsService,
@@ -28,8 +29,8 @@ export class TeamEditComponent extends BaseComponent implements OnInit {
    }
 
    ngOnInit() {
-    let oidURL = this.route.snapshot.paramMap.get('id');
-    this.findById( oidURL );
+    this.oidURL = this.route.snapshot.paramMap.get('id');
+    this.findById( this.oidURL );
   }
 
 
@@ -49,6 +50,25 @@ export class TeamEditComponent extends BaseComponent implements OnInit {
       this.hideLoading(this.loadingService);
       this.showErrorMessage();
     }
+  }
+
+
+  /**
+   * 
+   * @param team 
+   */
+  save( team:Team ){
+    this.showLoading( this.loadingService );
+    team.oid = this.oidURL;
+    this.service.update( team ).subscribe(  
+      data=>{
+        this.hideLoading( this.loadingService );
+        this.router.navigate(["/app/teams"]);
+      }, 
+      err =>{
+        this.hideLoading( this.loadingService );
+        this.showErrorMessage();
+      } );
   }
 
 }

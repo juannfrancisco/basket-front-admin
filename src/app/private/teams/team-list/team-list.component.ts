@@ -4,7 +4,7 @@ import { TeamsService } from './../../../services/teams.service';
 import { Team } from './../../../models/team';
 import { BreadcrumbItem } from './../../../models/breadcrumb-item';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-team-list',
@@ -14,18 +14,23 @@ import { Router } from '@angular/router';
 export class TeamListComponent extends BaseComponent implements OnInit {
 
   elements: Team[] = []; 
+  oidChampionship: string;
 
   constructor(
     private service: TeamsService,
     private loadingService: LoadingService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     super("Equipos",[
       {name:"Home",link:"/app"}, 
+      {name:"Campeonatos",link:"/app/championships"}, 
     ]);
    }
 
   ngOnInit() {
+    this.oidChampionship = this.route.snapshot.paramMap.get('idChampionship');
+    this.breadcrumbs.push( { name:'..', link:'/app/championships/'+this.oidChampionship+ '/profile'} );
     this.loadData();
   }
 
@@ -34,7 +39,7 @@ export class TeamListComponent extends BaseComponent implements OnInit {
 
     this.showLoading( this.loadingService );
 
-    this.service.findAll().subscribe(data => {
+    this.service.findAllByChampionship( this.oidChampionship ).subscribe(data => {
       this.elements = data;
       this.hideLoading( this.loadingService );
 
@@ -46,9 +51,7 @@ export class TeamListComponent extends BaseComponent implements OnInit {
   }
 
   edit(team:Team){
-    this.router.navigate( ['/app','teams',team.oid, 'profile'] );
-  }
-
-  
+    this.router.navigate( ['/app','championships',this.oidChampionship,'teams',team.oid, 'profile'] );
+  }  
 
 }

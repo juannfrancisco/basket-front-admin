@@ -3,7 +3,7 @@ import { LoadingService } from './../../../services/loading.service';
 import { TeamsService } from './../../../services/teams.service';
 import { BaseComponent } from './../../../models/base-component';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-team-create',
@@ -14,20 +14,24 @@ export class TeamCreateComponent extends BaseComponent implements OnInit {
 
 
   item: Team = new Team();
+  oidChampionship: string;
 
   constructor( 
     private service: TeamsService,
     private loadingService:LoadingService,
-    private router: Router) {
+    private router: Router,
+    private route: ActivatedRoute) {
     
       super( "Nuevo Equipo", [
         { name: "Home", link: "/app" },
-        { name: "Equipos", link: "/app/teams" },
+        { name:"Campeonatos",link:"/app/championships"}, 
       ] );
    }
 
   ngOnInit() {
-    
+    this.oidChampionship = this.route.snapshot.paramMap.get('idChampionship');
+    this.breadcrumbs.push( { name:'..', link:'/app/championships/'+this.oidChampionship+ '/profile'} );
+    this.breadcrumbs.push({ name: "Equipos", link: '/app/championships/'+this.oidChampionship+ '/teams' });
   }
 
 
