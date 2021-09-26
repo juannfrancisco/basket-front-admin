@@ -42,6 +42,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { GameModalFinalizeComponent } from './private/games/game-modal-finalize/game-modal-finalize.component';
 import { GamePlayingComponent } from './private/games/game-playing/game-playing.component';
 import { GameModalPlayingCrewComponent } from './private/games/game-modal-playing-crew/game-modal-playing-crew.component';
+import { GameModalPlayingStatComponent } from './private/games/game-modal-playing-stat/game-modal-playing-stat.component';
 
 
 @NgModule({
@@ -82,7 +83,8 @@ import { GameModalPlayingCrewComponent } from './private/games/game-modal-playin
     ChampionshipProfileComponent,
     GameModalFinalizeComponent,
     GamePlayingComponent,
-    GameModalPlayingCrewComponent
+    GameModalPlayingCrewComponent,
+    GameModalPlayingStatComponent
   ],
   imports: [
     BrowserModule,

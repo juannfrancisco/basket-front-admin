@@ -10,4 +10,8 @@ export class Player {
     gender:string;
     number:number;
     position:string;
+
+
+    headline?:boolean;
+
 }

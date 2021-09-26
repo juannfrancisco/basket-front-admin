@@ -1,0 +1,116 @@
+<div class="modal-header">
+        <div class="d-inline p-2 bg-dark text-white">{{player.number}}</div>
+        <div class="d-inline p-2">
+            <div class="fw-bolder" >{{player.name}} {{player.lastName}}</div>
+            <div class="text-muted fs-6 lh-1 ">
+                <small>{{player.position}}</small>
+            </div>
+        </div>
+    
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="close()"></button>
+</div>
+<div class="modal-body p-0">
+
+    <div class="bg-light border-bottom p-3">
+        <h4>
+            <i class="ico-screenshot"></i> Puntos</h4>
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="d-grid gap-2 mb-3">
+                    <div class="btn-group btn-group-lg" role="group">
+                        <button type="button" class="btn btn-outline-success btn-lg" (click)="addStat(1, 'PTS')">
+                            1 punto
+                        </button>
+                        <button type="button" class="btn btn-outline-success btn-lg" (click)="addStat(2, 'PTS')">
+                            2 puntos
+                        </button>
+                        <button type="button" class="btn btn-outline-success btn-lg" (click)="addStat(3, 'PTS')">
+                            3 puntos
+                        </button>
+                    </div>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <div class="btn-group btn-group-lg" role="group">
+                        <button type="button" class="btn btn-outline-danger btn-lg" (click)="addStat(1, 'MPT')">
+                            1 punto
+                        </button>
+                        <button type="button" class="btn btn-outline-danger btn-lg" (click)="addStat(2, 'MPT')">
+                            2 puntos
+                        </button>
+                        <button type="button" class="btn btn-outline-danger btn-lg" (click)="addStat(3, 'MPT')">
+                            3 puntos
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="p-3">
+        <h4>
+            <i class="ico-screenshot"></i> Ataque</h4>
+
+        <div class="row">
+            <div class="col-12 mb-4">
+                <div class="d-grid gap-2 mb-3">
+                    <div class="btn-group btn-group-lg" role="group">
+                        <button type="button" class="btn btn-outline-info btn-block mb5" (click)="addStat(1, 'OR')">
+                            Rebote
+                        </button>
+                        <button type="button" class="btn btn-outline-info btn-block mb5" (click)="addStat(1, 'AST')">
+                            + Asistencia
+                        </button>
+                        <button type="button" class="btn btn-outline-danger btn-block mb5" (click)="addStat(1, 'MAS')">
+                            - Asistencia
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-light border-bottom border-top p-3">
+        <h4>
+            <i class="ico-screenshot"></i> Defensa</h4>
+        <div class="row">
+            <div class="col-12">
+                <div class="d-grid gap-2 mb-3">
+                    <div class="btn-group btn-group-lg" role="group">
+                        <button type="button" class="btn btn-outline-info btn-block mb5" (click)="addStat(1, 'DR')">
+                            Rebote
+                        </button>
+                        <button type="button" class="btn btn-outline-info btn-block mb5" (click)="addStat(1, 'STL')">
+                            Robo
+                        </button>
+                        <button type="button" class="btn btn-outline-info btn-block mb5" (click)="addStat(1, 'BLK')">
+                            Bloqueo
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="p-3">
+        <h4>
+            <i class="ico-screenshot"></i> Fouls</h4>
+        <div class="row">
+            <div class="col-12">
+                <div class="d-grid gap-2 mb-3">
+                    <div class="btn-group btn-group-lg" role="group">
+                        <button type="button" class="btn btn-outline-danger btn-block mb5" (click)="addStat(1, 'PF')">
+                            Foul
+                        </button>
+                        <button type="button" class="btn btn-outline-danger btn-block mb5" (click)="addStat(1, 'PF')">
+                            Foul Tecnico
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

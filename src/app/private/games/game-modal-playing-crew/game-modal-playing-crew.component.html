@@ -1,15 +1,17 @@
 <div class="modal-header">
     <h5 class="modal-title">Formación {{team.name}} </h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="close()"></button>
 </div>
 <div class="modal-body">
     <ul class="list-group list-group-flush">
-        <li class="list-group-item" *ngFor="let player of team?.players">
+        <li class="list-group-item" *ngFor="let player of team?.players" (click)="selectPlayer(player)">
             <div class="row">
-                <div class="col-1">
-                    <span class="badge bg-secondary pr-3">{{player.number}}</span>
+                <div class="col-2">
+                    <div class="bg-dark text-white p-2 text-center">
+                        {{player.number}}
+                    </div>
                 </div>
-                <div class="col-11">
+                <div class="col-8">
                     <div>
                         {{player.name}} {{player.lastName}}
                     </div>
@@ -18,11 +20,17 @@
                     </div>
 
                 </div>
+                <div class="col-2">
+                    <span class="badge bg-success" *ngIf="player.headline">Titular</span>
+                </div>
             </div>
         </li>
     </ul>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Salir</button>
-    <button type="button" class="btn btn-primary">Guardar</button>
+    <div class="d-grid gap-2">
+        <button type="button" class="btn btn-primary">Guardar</button>
+    </div>
+    <!--button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="close()" >Salir</button-->
+
 </div>

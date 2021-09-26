@@ -52,7 +52,6 @@ export class GameFormComponent implements OnInit {
 
 
   save(){
-    debugger;
     if( this.formGroup.valid ){
 
       this.dateObject.setMonth(this.model.month - 1 );

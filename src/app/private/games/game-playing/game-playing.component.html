@@ -52,7 +52,7 @@
                 <div class="card mb-3">
                     <div class="card-header">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-success btn-sm" (click)="formacion('local')" >
+                            <button type="button" class="btn btn-success btn-sm" (click)="formacion('local')">
                                 <i class="bi bi-justify"></i>
                                 Formación
                             </button>
@@ -63,40 +63,45 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="alert alert-warning mt20 ml10 mr10 text-center">
-                            <span class="media-text ellipsis nm">No se han asignado jugadores a la formación.</span>
+
+
+                        <div class="list-group ma15">
+                            <div>
+                                <ul class="list-group list-group-flush">
+                                    <ng-container *ngFor="let player of element.local?.players" >
+
+                                    
+                                    <li class="list-group-item" *ngIf="player.headline" (click)="optionPlayer(player, 'local')" >
+                                        <div class="row">
+                                            <div class="col-2">
+                                                <div class="bg-dark text-white p-2 text-center">
+                                                    {{player.number}}
+                                                </div>
+                                            </div>
+                                            <div class="col-10">
+                                                <div>
+                                                    {{player.name}} {{player.lastName}}
+                                                </div>
+                                                <div class="text-muted">
+                                                    <small>{{player.position}}</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ng-container>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="list-group ma15">
-                    <div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item" *ngFor="let player of element.local?.players">
-                                <div class="row">
-                                    <div class="col-1">
-                                        <span class="badge bg-secondary pr-3">{{player.number}}</span>
-                                    </div>
-                                    <div class="col-11">
-                                        <div>
-                                            {{player.name}} {{player.lastName}}
-                                        </div>
-                                        <div class="text-muted">
-                                            <small>{{player.position}}</small>
-                                        </div>
 
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
             </div>
             <div class="col-md-6 col-sm-6">
                 <div class="card mb-3">
                     <div class="card-header">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-success btn-sm" (click)="formacion('visitor')" >
+                            <button type="button" class="btn btn-success btn-sm" (click)="formacion('visitor')">
                                 <i class="bi bi-justify"></i>
                                 Formación
                             </button>

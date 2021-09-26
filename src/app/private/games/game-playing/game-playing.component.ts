@@ -1,3 +1,5 @@
+import { GameModalPlayingStatComponent } from './../game-modal-playing-stat/game-modal-playing-stat.component';
+import { Player } from './../../../models/player';
 import { GameModalPlayingCrewComponent } from './../game-modal-playing-crew/game-modal-playing-crew.component';
 import { PlayersService } from './../../../services/players.service';
 import { TeamsService } from './../../../services/teams.service';
@@ -70,10 +72,25 @@ export class GamePlayingComponent extends BaseComponent implements OnInit {
   }
 
 
-  formacion( crew:string ){
+  formacion( teamType:string ){
     const modalRef = this.modalService.open(GameModalPlayingCrewComponent); //,{ size: 'lg' }
-    modalRef.componentInstance.team = this.element[crew];
-    
+    modalRef.componentInstance.team = this.element[teamType];
+    modalRef.result.then( result=>{ console.log(result) } );
+  }
+
+
+  /**
+   * 
+   * @param player 
+   * @param teamType 
+   */
+  optionPlayer(player:Player, teamType:string){
+
+    const modalRef = this.modalService.open(GameModalPlayingStatComponent); //,{ size: 'lg' }
+    modalRef.componentInstance.player = player;
+    modalRef.componentInstance.team = this.element[teamType];
+    modalRef.result.then( result=>{ console.log(result) } );
+
   }
 
 }
