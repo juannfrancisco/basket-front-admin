@@ -12,6 +12,16 @@ steps:
       npm run build-prod
    waitFor:
    - install_packages
+ - id: 'Build docker image angular'
+   name: 'gcr.io/cloud-builders/docker'
+   args: ["build", 
+    "-t", 
+    "gcr.io/$PROJECT_ID/basketball-pro:latest", "."]
+
+ - id: 'Push docker image angular'
+   name: 'gcr.io/cloud-builders/docker'
+   args: ["push",  "gcr.io/$PROJECT_ID/basketball-pro:latest"]
+
  - id: remove_to_bucket
    name: 'gcr.io/cloud-builders/gsutil'
    entrypoint: 'bash'
