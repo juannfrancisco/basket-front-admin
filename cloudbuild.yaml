@@ -9,7 +9,7 @@ steps:
    args:
     - '-c'
     - |-
-      npm run build-prod
+      npm run build-prod-run
    waitFor:
    - install_packages
  - id: 'Build docker image angular'
