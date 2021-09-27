@@ -5,7 +5,7 @@
 
         <div class="row" *ngIf="element">
             <div class="col">
-                <div class="card text-white bg-dark mb-4">
+                <div class="card text-white bg-success mb-4">
                     <div class="card-header text-center">
                         {{element.championship?.name}}
                     </div>
@@ -25,11 +25,8 @@
                                     <span class="text-muted">v/s</span>
                                     <span class="fs-2 p-4 font-monospace">{{element.scoreVisitor}}</span>
                                 </div>
-                                <div [ngSwitch]="element.state">
-                                    <span *ngSwitchCase="'PENDING'">PENDIENTE</span>
-                                    <span *ngSwitchCase="'IN_PROGRESS'">EN PROGRESO</span>
-                                    <span *ngSwitchCase="'FINALIZED'">FINAL</span>
-                                    <span *ngSwitchDefault>...</span>
+                                <div>
+                                    <span>JUGANDO</span>
                                 </div>
                             </div>
                             <div class="col text-center">
@@ -68,30 +65,56 @@
                         <div class="list-group ma15">
                             <div>
                                 <ul class="list-group list-group-flush">
-                                    <ng-container *ngFor="let player of element.local?.players" >
+                                    <ng-container *ngFor="let player of element.local?.players">
 
-                                    
-                                    <li class="list-group-item" *ngIf="player.headline" (click)="optionPlayer(player, 'local')" >
-                                        <div class="row">
-                                            <div class="col-2">
-                                                <div class="bg-dark text-white p-2 text-center">
-                                                    {{player.number}}
+
+                                        <li class="list-group-item" *ngIf="player.headline" (click)="optionPlayer(player, 'local')">
+                                            <div class="row">
+                                                <div class="col-2">
+                                                    <div class="bg-dark text-white p-2 text-center">
+                                                        {{player.number}}
+                                                    </div>
+                                                </div>
+                                                <div class="col-10">
+                                                    <div>
+                                                        {{player.name}} {{player.lastName}}
+                                                    </div>
+                                                    <div class="text-muted">
+                                                        <small>{{player.position}}</small>
+                                                    </div>
                                                 </div>
                                             </div>
+                                        </li>
+                                    </ng-container>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3">
+                    <div class="card-header">
+                        Estadistica
+                    </div>
+                    <div class="card-body">
+
+                        <div class="list-group ma15">
+                            <ul class="list-group list-group-flush">
+                                <ng-container *ngFor="let stat of localStats">
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-2">
+                                                {{stat.type}}
+                                            </div>
                                             <div class="col-10">
-                                                <div>
-                                                    {{player.name}} {{player.lastName}}
-                                                </div>
-                                                <div class="text-muted">
-                                                    <small>{{player.position}}</small>
-                                                </div>
+                                                {{stat.player.name}} {{stat.player.lastName}}
                                             </div>
                                         </div>
                                     </li>
                                 </ng-container>
-                                </ul>
-                            </div>
+                            </ul>
                         </div>
+
                     </div>
                 </div>
 

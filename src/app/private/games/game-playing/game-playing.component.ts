@@ -1,3 +1,4 @@
+import { GameStat } from './../../../models/game-stat';
 import { GameModalPlayingStatComponent } from './../game-modal-playing-stat/game-modal-playing-stat.component';
 import { Player } from './../../../models/player';
 import { GameModalPlayingCrewComponent } from './../game-modal-playing-crew/game-modal-playing-crew.component';
@@ -19,7 +20,9 @@ import { constants } from '../../../../environments/constants';
 })
 export class GamePlayingComponent extends BaseComponent implements OnInit {
 
-  element:Game = new Game() ;
+  element:Game = new Game();
+  localStats: GameStat[] = [];
+  visitorStats: GameStat[] = [];
   oidChampionship: string;
 
   constructor(
@@ -54,7 +57,7 @@ export class GamePlayingComponent extends BaseComponent implements OnInit {
       this.showLoading(this.loadingService, true);
       this.element = await this.service.findById(oidURL).toPromise();
       this.element.local.players = await this.servicePlayers.findAllByTeam( this.element.local.oid ).toPromise();
-      this.element.visitor.players = await this.servicePlayers.findAllByTeam( this.element.visitor.oid ).toPromise();
+      //this.element.visitor.players = await this.servicePlayers.findAllByTeam( this.element.visitor.oid ).toPromise();
 
       this.element.local.players.forEach( player => {
         player.position = constants[player.position];
@@ -89,8 +92,28 @@ export class GamePlayingComponent extends BaseComponent implements OnInit {
     const modalRef = this.modalService.open(GameModalPlayingStatComponent); //,{ size: 'lg' }
     modalRef.componentInstance.player = player;
     modalRef.componentInstance.team = this.element[teamType];
-    modalRef.result.then( result=>{ console.log(result) } );
+    modalRef.componentInstance.typeTeam = teamType.toUpperCase();
+    modalRef.componentInstance.quarter = 1;
+    modalRef.componentInstance.game = this.element;
+    modalRef.result.then( result =>{
+      result.player = player;
+      
+      if( result ){
+        let value = 0;
+        this[teamType+"Stats"].push(result);
 
+        if(result["type"] == "PTS" ){
+          value = result["value"];
+          if(teamType== "local"){
+            this.element.scoreLocal = this.element.scoreLocal + value;
+            //this.localStats.push(result);
+          }else{
+            this.element.scoreVisitor = this.element.scoreVisitor + value;
+            //this.visitorStats.push(result);
+          }
+        }
+      }
+    });
   }
 
 }

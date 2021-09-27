@@ -1,3 +1,4 @@
+import { GameStat } from './../models/game-stat';
 import { environment } from './../../environments/environment';
 import { Game } from './../models/game';
 import { HttpClient } from '@angular/common/http';
@@ -33,5 +34,14 @@ export class GamesService {
 
   updateState( game:Game ){
     return this.http.post( environment.endpoint +  "games/"+game.oid+"/state", game );
+  }
+
+
+  findStats( oid:string ){
+    return this.http.get<GameStat>( environment.endpoint +  "games/" + oid + "/stats" );
+  }
+
+  saveStat( oid:string, gameStat:GameStat ){
+    return this.http.put( environment.endpoint +  "games/" + oid + "/stats" , gameStat);
   }
 }
