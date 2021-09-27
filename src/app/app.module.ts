@@ -43,6 +43,7 @@ import { GameModalFinalizeComponent } from './private/games/game-modal-finalize/
 import { GamePlayingComponent } from './private/games/game-playing/game-playing.component';
 import { GameModalPlayingCrewComponent } from './private/games/game-modal-playing-crew/game-modal-playing-crew.component';
 import { GameModalPlayingStatComponent } from './private/games/game-modal-playing-stat/game-modal-playing-stat.component';
+import { GameClockComponent } from './private/games/game-clock/game-clock.component';
 
 
 @NgModule({
@@ -84,7 +85,8 @@ import { GameModalPlayingStatComponent } from './private/games/game-modal-playin
     GameModalFinalizeComponent,
     GamePlayingComponent,
     GameModalPlayingCrewComponent,
-    GameModalPlayingStatComponent
+    GameModalPlayingStatComponent,
+    GameClockComponent
   ],
   imports: [
     BrowserModule,
