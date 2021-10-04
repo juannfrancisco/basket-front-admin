@@ -5,7 +5,7 @@
 
         <div class="row" *ngIf="element">
             <div class="col">
-                <div class="card text-white bg-success mb-4">
+                <div class="card text-white bg-dark mb-4">
                     <div class="card-header text-center">
                         {{element.championship?.name}}
                     </div>
@@ -15,37 +15,25 @@
                             <div class="col text-center">
                                 <img src="assets/image/icons/teams-default4.png" class="card-img-top" style="width:70px;" alt="...">
                                 <div class="fw-bolder">{{element.local?.name}}</div>
-                                <div class="fs-6 fw-light lh-1 text-muted">
+                                <div class="fs-6 fw-light lh-1">
                                     <small>LOCAL</small>
                                 </div>
+                                <div class="fs-2 p-2 font-monospace">{{element.localScore}}</div>
                             </div>
-                            <div class="col text-center">
-                                <div style="padding-top: 20px">
-                                    <span class="fs-2 p-4 font-monospace">{{element.scoreLocal}}</span>
-                                    <span class="text-muted">v/s</span>
-                                    <span class="fs-2 p-4 font-monospace">{{element.scoreVisitor}}</span>
-                                </div>
-                                <div>
-                                    <span>JUGANDO</span>
-                                </div>
+                            <div class="col text-dark ">
+                                    <app-game-clock></app-game-clock>
                             </div>
                             <div class="col text-center">
                                 <img src="assets/image/icons/teams-default4.png" class="card-img-top" style="width:70px;" alt="...">
                                 <div class="fw-bolder">{{element.visitor?.name}}</div>
-                                <div class="fs-6 fw-light lh-1 text-muted">
+                                <div class="fs-6 fw-light lh-1">
                                     <small>VISITANTE</small>
                                 </div>
+                                <div class="fs-2 p-2 font-monospace">{{element.visitorScore}}</div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-
-
-        <div class="row">
-            <div class="col">
-                <app-game-clock></app-game-clock>
             </div>
         </div>
 
@@ -55,7 +43,7 @@
                 <div class="card mb-3">
                     <div class="card-header">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-success btn-sm" (click)="formacion('local')">
+                            <button type="button" class="btn btn-success btn-sm" (click)="openFormacion('local')">
                                 <i class="bi bi-justify"></i>
                                 Formación
                             </button>
@@ -72,8 +60,6 @@
                             <div>
                                 <ul class="list-group list-group-flush">
                                     <ng-container *ngFor="let player of element.local?.players">
-
-
                                         <li class="list-group-item" *ngIf="player.headline" (click)="optionPlayer(player, 'local')">
                                             <div class="row">
                                                 <div class="col-2">
@@ -81,13 +67,16 @@
                                                         {{player.number}}
                                                     </div>
                                                 </div>
-                                                <div class="col-10">
+                                                <div class="col-9">
                                                     <div>
                                                         {{player.name}} {{player.lastName}}
                                                     </div>
                                                     <div class="text-muted">
                                                         <small>{{player.position}}</small>
                                                     </div>
+                                                </div>
+                                                <div class="col-1" >
+                                                    <span class="badge rounded-pill bg-danger">{{player.fouls}}</span>
                                                 </div>
                                             </div>
                                         </li>
@@ -110,7 +99,7 @@
                                     <li class="list-group-item">
                                         <div class="row">
                                             <div class="col-2">
-                                                {{stat.type}}
+                                                {{stat.value}} {{stat.type}}
                                             </div>
                                             <div class="col-10">
                                                 {{stat.player.name}} {{stat.player.lastName}}
@@ -130,7 +119,7 @@
                 <div class="card mb-3">
                     <div class="card-header">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-success btn-sm" (click)="formacion('visitor')">
+                            <button type="button" class="btn btn-success btn-sm" (click)="openFormacion('visitor')">
                                 <i class="bi bi-justify"></i>
                                 Formación
                             </button>

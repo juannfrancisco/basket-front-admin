@@ -21,9 +21,9 @@
               </div>
               <div class="col text-center">
                 <div style="padding-top: 20px">
-                  <span class="fs-2 p-4 font-monospace">{{element.scoreLocal}}</span>
+                  <span class="fs-2 p-4 font-monospace">{{element.localScore}}</span>
                   <span class="text-muted">v/s</span>
-                  <span class="fs-2 p-4 font-monospace">{{element.scoreVisitor}}</span>
+                  <span class="fs-2 p-4 font-monospace">{{element.visitorScore}}</span>
                 </div>
                 <div [ngSwitch]="element.state">
                   <span *ngSwitchCase="'PENDING'">PENDIENTE</span>
@@ -110,9 +110,9 @@
             <h5 class="card-title">Opciones</h5>
             <hr>
             <div class="d-grid gap-2">
-              <a class="btn btn-outline-primary" type="button" routerLink="../playing">Iniciar Partido</a>
-              <button class="btn btn-outline-danger" (click)="finalize()" type="button">Finalizar Encuentro</button>
-              <a class="btn btn-outline-secondary" type="button" routerLink="../edit">Editar</a>
+              <a class="btn btn-outline-primary" routerLink="../playing">Iniciar Partido</a>
+              <button class="btn btn-outline-danger" (click)="finalize()" >Finalizar Encuentro</button>
+              <a class="btn btn-outline-secondary" routerLink="../edit">Editar</a>
             </div>
 
           </div>

@@ -24,6 +24,8 @@ export class GamePlayingComponent extends BaseComponent implements OnInit {
   localStats: GameStat[] = [];
   visitorStats: GameStat[] = [];
   oidChampionship: string;
+  gameStats:GameStat[]=[];
+  players:Map<string,Player> = new Map();
 
   constructor(
     private service: GamesService,
@@ -57,14 +59,19 @@ export class GamePlayingComponent extends BaseComponent implements OnInit {
       this.showLoading(this.loadingService, true);
       this.element = await this.service.findById(oidURL).toPromise();
       this.element.local.players = await this.servicePlayers.findAllByTeam( this.element.local.oid ).toPromise();
-      //this.element.visitor.players = await this.servicePlayers.findAllByTeam( this.element.visitor.oid ).toPromise();
+      this.element.visitor.players = await this.servicePlayers.findAllByTeam( this.element.visitor.oid ).toPromise();
+      this.gameStats = await this.service.findStats( this.element.oid ).toPromise();
 
       this.element.local.players.forEach( player => {
         player.position = constants[player.position];
+        this.players.set( player.oid, player );
       } );
       this.element.visitor.players.forEach( player => {
         player.position = constants[player.position];
+        this.players.set( player.oid, player );
       } );
+
+      this.processStats();
 
       this.hideLoading(this.loadingService);
       this.title = this.element.local.name + " v/s " + this.element.visitor.name;
@@ -75,7 +82,56 @@ export class GamePlayingComponent extends BaseComponent implements OnInit {
   }
 
 
-  formacion( teamType:string ){
+  processStats(){
+    this.gameStats.forEach( gameStat => {
+      this.processStat(gameStat);
+    } );
+  }
+
+  processStat(gameStat:GameStat){
+    gameStat.player = this.findPlayer( this.element[ gameStat.typeTeam.toLocaleLowerCase() ].players, gameStat.oidPlayer );
+    this[gameStat.typeTeam.toLowerCase() + "Stats"].push(gameStat);
+    
+    if(gameStat.type == "PTS" ){
+      this.PTSStats(gameStat);
+    }
+    if(gameStat.type == "PF" ){
+      this.PFStats(gameStat);
+    }
+  }
+
+
+
+  PTSStats(gameStat:GameStat){
+    this.element[gameStat.typeTeam.toLocaleLowerCase()+ "Score"] = this.element[gameStat.typeTeam.toLocaleLowerCase()+ "Score"] + gameStat.value;
+    //player.fouls = player.fouls? player.fouls + 1: 1;
+    
+  }
+
+  PFStats(gameStat:GameStat){
+    //let player = this.findPlayer( this.element[ gameStat.typeTeam.toLocaleLowerCase() ].players, gameStat.oidPlayer );
+    gameStat.player.fouls = gameStat.player.fouls? gameStat.player.fouls + 1: 1;
+  }
+
+  
+
+  findPlayer(list:Player[], oid:string){
+    let playerfind:Player;
+    list.forEach( player=>{ 
+      if( player.oid == oid ){
+        playerfind = player;
+        return player;
+      }
+     } );
+    return playerfind;
+  }
+
+
+
+
+
+
+  openFormacion( teamType:string ){
     const modalRef = this.modalService.open(GameModalPlayingCrewComponent); //,{ size: 'lg' }
     modalRef.componentInstance.team = this.element[teamType];
     modalRef.result.then( result=>{ console.log(result) } );
@@ -105,13 +161,17 @@ export class GamePlayingComponent extends BaseComponent implements OnInit {
         if(result["type"] == "PTS" ){
           value = result["value"];
           if(teamType== "local"){
-            this.element.scoreLocal = this.element.scoreLocal + value;
-            //this.localStats.push(result);
+            this.element.localScore = this.element.localScore + value;
           }else{
-            this.element.scoreVisitor = this.element.scoreVisitor + value;
-            //this.visitorStats.push(result);
+            this.element.visitorScore = this.element.visitorScore + value;
           }
         }
+        
+        if( result["type"] == "PF" ){
+          player.fouls = player.fouls? player.fouls + 1: 1;
+        }
+
+
       }
     });
   }

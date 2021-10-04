@@ -13,5 +13,6 @@ export class Player {
 
 
     headline?:boolean;
+    fouls?:number;
 
 }

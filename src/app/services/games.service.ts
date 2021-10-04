@@ -38,7 +38,7 @@ export class GamesService {
 
 
   findStats( oid:string ){
-    return this.http.get<GameStat>( environment.endpoint +  "games/" + oid + "/stats" );
+    return this.http.get<GameStat[]>( environment.endpoint +  "games/" + oid + "/stats" );
   }
 
   saveStat( oid:string, gameStat:GameStat ){

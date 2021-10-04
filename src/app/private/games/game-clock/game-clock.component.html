@@ -1,18 +1,15 @@
 <div class="card mb-4">
     <div class="card-body">
         <div class="text-center">
-            <div>
+            <h4>
                 <i class="bi bi-clock-fill"></i>
                 {{timetext}}
-            </div>
-            <div>
-                <h5 class="semibold mb0">{{quarter.length}}er Cuarto</h5>
-                <span>--</span>
-            </div>
+            </h4>
+            <h5 class="semibold mb0">{{quarter.length}}er Cuarto</h5>            
         </div>
     </div>
     <div class="card-footer text-center">
-        <div class="btn-group" role="group" aria-label="Basic example">
+        <div class="btn-group" role="group" >
             <button type="button" class="btn btn-outline-primary" (click)="startCount()">
                 <i class="bi bi-play-fill"></i>
                 <div>Iniciar</div>
@@ -21,9 +18,9 @@
                 <i class="bi bi-pause-fill"></i>
                 <div>Pausar</div>
             </button>
-            <button type="button" class="btn btn-outline-primary" (click)="stopQuarter()">
+            <button type="button" class="btn btn-outline-danger" (click)="stopQuarter()">
                 <i class="bi bi-stop-fill"></i>
-                <div>Suspender</div>
+                <div>Detener</div>
             </button>
         </div>
     </div>

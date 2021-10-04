@@ -7,8 +7,8 @@ export class Game {
     date:Date;
     visitor:Team;
     local:Team;
-    scoreVisitor:number;
-    scoreLocal:number;
+    visitorScore:number;
+    localScore:number;
     court: Court;
     referee: string;
     championship:Championship;

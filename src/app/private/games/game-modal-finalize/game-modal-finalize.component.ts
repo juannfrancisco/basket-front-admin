@@ -35,8 +35,8 @@ export class GameModalFinalizeComponent implements OnInit {
   save(){
     let gameUpdate:Game = new Game();
     gameUpdate.oid = this.game.oid;
-    gameUpdate.scoreLocal = this.scoreLocal;
-    gameUpdate.scoreVisitor = this.scoreVisitor;
+    gameUpdate.localScore = this.scoreLocal;
+    gameUpdate.visitorScore = this.scoreVisitor;
 
     this.gamesService.updateState( gameUpdate ).subscribe( 
       data=>{
