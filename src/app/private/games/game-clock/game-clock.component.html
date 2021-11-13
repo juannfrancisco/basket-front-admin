@@ -10,15 +10,15 @@
     </div>
     <div class="card-footer text-center">
         <div class="btn-group" role="group" >
-            <button type="button" class="btn btn-outline-primary" (click)="startCount()">
+            <button type="button" class="btn btn-outline-primary" [disabled]="stateWatch=='play'" (click)="startCount()">
                 <i class="bi bi-play-fill"></i>
                 <div>Iniciar</div>
             </button>
-            <button type="button" class="btn btn-outline-primary" (click)="pauseCount()">
+            <button type="button" class="btn btn-outline-primary" [disabled]="stateWatch=='pause' || stateWatch=='stop'" (click)="pauseCount()">
                 <i class="bi bi-pause-fill"></i>
                 <div>Pausar</div>
             </button>
-            <button type="button" class="btn btn-outline-danger" (click)="stopQuarter()">
+            <button type="button" class="btn btn-outline-danger" [disabled]="stateWatch=='stop'" (click)="stopQuarter()">
                 <i class="bi bi-stop-fill"></i>
                 <div>Detener</div>
             </button>

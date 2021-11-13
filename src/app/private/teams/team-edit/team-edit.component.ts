@@ -14,6 +14,7 @@ export class TeamEditComponent extends BaseComponent implements OnInit {
 
   item:Team;
   oidURL :string;
+  oidChampionship: string;
 
   constructor( 
     private service: TeamsService,
@@ -21,15 +22,21 @@ export class TeamEditComponent extends BaseComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute) {
 
-      super("Editar Equipo", [
-        { name: "Home", link: "/app" },
-        { name: "Equipos", link: "/app/teams" }
+      super("Editar",[
+        {name:"Home",link:"/app"}, 
+        {name:"Campeonatos",link:"/app/championships"}, 
       ]);
-
    }
 
+   /**
+    * 
+    */
    ngOnInit() {
+    this.oidChampionship = this.route.snapshot.paramMap.get('idChampionship');
     this.oidURL = this.route.snapshot.paramMap.get('id');
+    this.breadcrumbs.push( { name:'..', link:'/app/championships/'+this.oidChampionship+ '/profile'} );    
+    this.breadcrumbs.push({ name: "Equipos", link: '/app/championships/'+this.oidChampionship+ '/teams' });
+
     this.findById( this.oidURL );
   }
 
@@ -42,10 +49,9 @@ export class TeamEditComponent extends BaseComponent implements OnInit {
     try{
       this.showLoading(this.loadingService, true);
       this.item = await this.service.findById(oidURL).toPromise();
-      //this.element.gender = constants[this.element.gender];
-      //this.element.category = constants[this.element.category];
       this.hideLoading(this.loadingService);
-      this.title = this.item.name;
+      this.breadcrumbs.push({ name: this.item.name, link: '/app/championships/'+this.oidChampionship+ '/teams/' + this.oidURL + '/profile' });
+
     }catch(e){
       this.hideLoading(this.loadingService);
       this.showErrorMessage();
@@ -63,7 +69,7 @@ export class TeamEditComponent extends BaseComponent implements OnInit {
     this.service.update( team ).subscribe(  
       data=>{
         this.hideLoading( this.loadingService );
-        this.router.navigate(["/app/teams"]);
+        this.router.navigate(["/app", "championships",this.oidChampionship, "teams", this.oidURL,"profile" ]);
       }, 
       err =>{
         this.hideLoading( this.loadingService );

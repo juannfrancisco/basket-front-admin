@@ -68,7 +68,7 @@ export class TeamProfileComponent extends BaseComponent implements OnInit {
   }
 
   edit(team:Team){
-    this.router.navigate( ['/app','teams',team.oid, 'edit'] );
+    this.router.navigate( ['/app', 'championships',this.oidChampionship, 'teams',team.oid, 'edit'] );
   }
   
   remove(team:Team){
