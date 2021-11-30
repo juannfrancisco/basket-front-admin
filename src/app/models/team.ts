@@ -3,7 +3,9 @@ import { Contact } from './contact';
 export class Team {
 
     oid:string;
+    oidChampionship?:string;
     name:string;
+    alias?:string;
     nameURL:string;
     bio:string;
     gender:string;

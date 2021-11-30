@@ -15,6 +15,11 @@
       </div>
 
       <div class="mb-3">
+        <label class="form-label">Alias</label>
+        <input type="text" class="form-control" formControlName="alias" [ngClass]="classFormControl('alias')" [(ngModel)]="item.alias">
+      </div>
+
+      <div class="mb-3">
         <label class="form-label">Bio</label>
         <textarea class="form-control" formControlName="bio" [ngClass]="classFormControl('bio')" [(ngModel)]="item.bio"></textarea>
 

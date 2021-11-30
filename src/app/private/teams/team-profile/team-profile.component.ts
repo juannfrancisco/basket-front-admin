@@ -57,6 +57,7 @@ export class TeamProfileComponent extends BaseComponent implements OnInit {
       this.players.forEach( player =>{
         player.position = constants[player.position];
       } )
+      this.players = this.players.sort((a, b) => (a.number < b.number ? -1 : 1));
       this.element.gender = constants[this.element.gender];
       this.element.category = constants[this.element.category];
       this.hideLoading(this.loadingService);

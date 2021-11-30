@@ -41,10 +41,12 @@ export class TeamCreateComponent extends BaseComponent implements OnInit {
    */
   save( team:Team ){
     this.showLoading( this.loadingService );
+    team.oidChampionship = this.oidChampionship;
+    
     this.service.save( team ).subscribe(  
       data=>{
         this.hideLoading( this.loadingService );
-        this.router.navigate(["/app/teams"]);
+        this.router.navigate(["/app","championships", this.oidChampionship, "teams"]);
       }, 
       err =>{
         this.hideLoading( this.loadingService );

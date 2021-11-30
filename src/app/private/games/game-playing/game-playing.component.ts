@@ -62,6 +62,10 @@ export class GamePlayingComponent extends BaseComponent implements OnInit {
       this.element.visitor.players = await this.servicePlayers.findAllByTeam( this.element.visitor.oid ).toPromise();
       this.gameStats = await this.service.findStats( this.element.oid ).toPromise();
 
+      this.element.local.players = this.initPlayers(this.element.local.players);
+      this.element.visitor.players = this.initPlayers(this.element.visitor.players);
+
+      /**
       this.element.local.players.forEach( player => {
         player.position = constants[player.position];
         this.players.set( player.oid, player );
@@ -70,6 +74,7 @@ export class GamePlayingComponent extends BaseComponent implements OnInit {
         player.position = constants[player.position];
         this.players.set( player.oid, player );
       } );
+       */
 
       this.processStats();
 
@@ -79,6 +84,19 @@ export class GamePlayingComponent extends BaseComponent implements OnInit {
       this.hideLoading(this.loadingService);
       this.showErrorMessage();
     }
+  }
+
+   /**
+   * 
+   * @param players 
+   */
+  initPlayers(players: Player[]): Player[] {
+    players.forEach(player => {
+      player.position = constants[player.position];
+      this.players.set( player.oid, player );
+      //player.stats = new GameStatPlayer();
+    });
+    return players.sort((a, b) => (a.number < b.number ? -1 : 1));
   }
 
 

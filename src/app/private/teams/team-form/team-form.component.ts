@@ -26,6 +26,7 @@ export class TeamFormComponent implements OnInit {
     this.formGroup = new FormGroup({
       oid: new FormControl( this.item.oid ),
       name: new FormControl(this.item.name ,[ Validators.required, Validators.minLength(2)] ),
+      alias: new FormControl(this.item.name ,[ Validators.required, Validators.minLength(3), Validators.maxLength(3)] ),
       nameURL: new FormControl(this.item.nameURL ,[ Validators.required, Validators.minLength(2)] ),
       bio: new FormControl(this.item.bio, Validators.required),
       gender: new FormControl(this.item.gender, Validators.required),
@@ -59,6 +60,7 @@ export class TeamFormComponent implements OnInit {
       let team: Team = {
         oid: "",
         name: this.formGroup.get("name").value,
+        alias: this.formGroup.get("alias").value,
         nameURL: this.formGroup.get("nameURL").value,
         bio: this.formGroup.get("bio").value,
         gender: this.formGroup.get("gender").value,

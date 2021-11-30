@@ -45,7 +45,11 @@ export class GameModalPlayingStatComponent implements OnInit {
     gameStat.typeTeam = this.typeTeam;
     gameStat.value = value;
 
-    this.gamesService.saveStat(this.game.oid, gameStat).subscribe();
+    this.gamesService.saveStat(this.game.oid, gameStat).subscribe(data=>{
+      console.log(data);
+    }, error=>{
+      alert( "Error al guardar la estadistica" + gameStat.type + gameStat.value );
+    });
 
     this.activeModal.close(gameStat);
   }

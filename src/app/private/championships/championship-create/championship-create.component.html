@@ -1,3 +1,26 @@
-<p>
-  championship-create works!
-</p>
+<section id="main" role="main">
+  <div class="container-fluid">
+
+    <app-page-header [title]="title" [breadcrumbs]="breadcrumbs">
+    </app-page-header>
+
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-8" style="border-right:1px solid #e0e7e8;">
+            <app-championship-form [championship]="championship" [isLoading]="isLoading" (itemChampionship)="save($event)"></app-championship-form>
+            
+            <div *ngIf="hasError" class="alert alert-danger">{{errorMessage}}</div>
+            
+          </div>
+
+          <div class="col-md-4 hidden-xs hidden-sm">
+            <div>
+              <img class="img-fluid" src="assets/image/icons/basket-court-01.jpeg">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

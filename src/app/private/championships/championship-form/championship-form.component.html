@@ -1,3 +1,30 @@
-<p>
-  championship-form works!
-</p>
+
+
+<form id="form-crear-equipo" [formGroup]="form" >
+
+  <div class="mb-3">
+    <label class="form-label">Nombre</label>
+    <input type="text" (change)="test()" class="form-control" formControlName="name" [ngClass]="classFormControl('name')" [(ngModel)]="championship.name">
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">ID</label>
+    <input type="text" class="form-control" formControlName="oid" [ngClass]="classFormControl('oid')" [(ngModel)]="championship.oid">
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Descripción</label>
+    <textarea class="form-control" formControlName="description" [ngClass]="classFormControl('description')" [(ngModel)]="championship.description"></textarea>
+  </div>
+
+  <div class="mb-3">
+    <div class="col-sm-12">
+      <div class="d-grid gap-2">
+        <button class="btn btn-primary" value="button" [disabled]="form.invalid || isLoading" (click)="save()">
+          Guardar
+          <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" *ngIf="isLoading" ></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

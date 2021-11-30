@@ -12,7 +12,6 @@ export class CourtFormComponent implements OnInit {
   @Input() court:Court;
   @Input() isLoading:boolean;
   @Output() itemCourt = new EventEmitter<Court>();
-
   courtForm:FormGroup;
 
 
