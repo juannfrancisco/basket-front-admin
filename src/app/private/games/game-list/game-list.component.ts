@@ -39,7 +39,7 @@ export class GameListComponent extends BaseComponent implements OnInit {
 
     this.showLoading( this.loadingService );
 
-    this.service.findAll().subscribe(data => {
+    this.service.findAllByChampionship( this.oidChampionship ).subscribe(data => {
       this.elements = data;
       this.hideLoading( this.loadingService );
 

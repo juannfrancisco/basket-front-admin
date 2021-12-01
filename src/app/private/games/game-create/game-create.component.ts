@@ -46,7 +46,7 @@ export class GameCreateComponent extends BaseComponent implements OnInit {
 
   async loadData() {
     this.courts = await this.courtService.findAll().toPromise();
-    this.teams = await this.teamsService.findAll().toPromise();
+    this.teams = await this.teamsService.findAllByChampionship(this.oidChampionship).toPromise();
   }
 
   save(game: Game) {

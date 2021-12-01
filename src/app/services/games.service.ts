@@ -16,6 +16,11 @@ export class GamesService {
     return this.http.get<Game[]>( environment.endpoint +  "games" );
   }
 
+  findAllByChampionship( oidChampionship:string ){
+    return this.http.get<Game[]>( environment.endpoint + "championships/" + oidChampionship + "/games" );
+  }
+
+
   findById( oid:string ){
     return this.http.get<Game>( environment.endpoint +  "games/" + oid );
   }
