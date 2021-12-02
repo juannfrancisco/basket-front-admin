@@ -1,3 +1,6 @@
+import { TypeTeam } from './../../../models/type-team';
+import { Digit } from './../../../models/digit-scoreboard';
+import { Quarter } from './../../../models/quarter';
 import { GameStat } from './../../../models/game-stat';
 import { GameModalPlayingStatComponent } from './../game-modal-playing-stat/game-modal-playing-stat.component';
 import { Player } from './../../../models/player';
@@ -12,6 +15,7 @@ import { Game } from './../../../models/game';
 import { BaseComponent } from './../../../models/base-component';
 import { Component, OnInit } from '@angular/core';
 import { constants } from '../../../../environments/constants';
+import { Stats } from '../../../models/stats';
 
 @Component({
   selector: 'app-game-playing',
@@ -20,11 +24,25 @@ import { constants } from '../../../../environments/constants';
 })
 export class GamePlayingComponent extends BaseComponent implements OnInit {
 
-  element:Game = new Game();
+
+  element: Game = new Game();
   localStats: GameStat[] = [];
   visitorStats: GameStat[] = [];
   oidChampionship: string;
-  gameStats:GameStat[]=[];
+  gameStats: GameStat[] = [];
+  quarters: Quarter[] = [];
+  activeQuarter: Quarter = {
+    number: 1, name: "QT",
+    localPoints: 0,
+    visitorPoints: 0,
+    localFouls: 0,
+    visitorFouls: 0,
+    state: "pause",
+    localTimeouts: [],
+    visitorTimeouts: [],
+    timetext: "10:00"
+  };
+  loading: boolean;
   players:Map<string,Player> = new Map();
 
   constructor(
@@ -47,6 +65,7 @@ export class GamePlayingComponent extends BaseComponent implements OnInit {
 
     this.breadcrumbs.push( {name:'..',link:'/app/championships/'+this.oidChampionship + "/profile" } );
     this.breadcrumbs.push( {name:'Partidos',link:'/app/championships/'+this.oidChampionship + "/games" } );
+    this.quarters.push(this.activeQuarter);
     this.findById( oidURL );
   }
 
@@ -57,26 +76,17 @@ export class GamePlayingComponent extends BaseComponent implements OnInit {
   async findById( oidURL ){
     try{
       this.showLoading(this.loadingService, true);
-      this.element = await this.service.findById(oidURL).toPromise();
+      this.element = await this.service.findById(oidURL, this.oidChampionship).toPromise();
       this.element.local.players = await this.servicePlayers.findAllByTeam( this.element.local.oid ).toPromise();
       this.element.visitor.players = await this.servicePlayers.findAllByTeam( this.element.visitor.oid ).toPromise();
-      this.gameStats = await this.service.findStats( this.element.oid ).toPromise();
-
+      
       this.element.local.players = this.initPlayers(this.element.local.players);
       this.element.visitor.players = this.initPlayers(this.element.visitor.players);
 
-      /**
-      this.element.local.players.forEach( player => {
-        player.position = constants[player.position];
-        this.players.set( player.oid, player );
-      } );
-      this.element.visitor.players.forEach( player => {
-        player.position = constants[player.position];
-        this.players.set( player.oid, player );
-      } );
-       */
-
-      this.processStats();
+      this.initGameStats();
+ 
+      this.element.localScoreObj = [{ number: "0", active: false }, { number: "0", active: false }, { number: "0", active: false }];
+      this.element.visitorScoreObj = [{ number: "0", active: false }, { number: "0", active: false }, { number: "0", active: false }];
 
       this.hideLoading(this.loadingService);
       this.title = this.element.local.name + " v/s " + this.element.visitor.name;
@@ -86,6 +96,27 @@ export class GamePlayingComponent extends BaseComponent implements OnInit {
     }
   }
 
+  /**
+   * 
+   * @param stats 
+   */
+  async initGameStats() {
+    let gameStats = await this.service.findStats( this.element.oid, this.oidChampionship ).toPromise();
+    gameStats.forEach(stat => {
+      let player:Player;
+      if(stat.typeTeam == TypeTeam.LOCAL){
+        player = this.element.local.players.find( player=> player.oid == stat.oidPlayer );
+      }else{
+        player = this.element.visitor.players.find( player=> player.oid == stat.oidPlayer );
+      }
+      stat.player = player;
+      this.eventStatsGame(stat);
+    });
+  }
+
+
+
+
    /**
    * 
    * @param players 
@@ -94,104 +125,141 @@ export class GamePlayingComponent extends BaseComponent implements OnInit {
     players.forEach(player => {
       player.position = constants[player.position];
       this.players.set( player.oid, player );
-      //player.stats = new GameStatPlayer();
+      player.stats = new Stats;
     });
     return players.sort((a, b) => (a.number < b.number ? -1 : 1));
   }
 
 
-  processStats(){
-    this.gameStats.forEach( gameStat => {
-      this.processStat(gameStat);
-    } );
-  }
+  /**
+   * Recibe el evento de un punto, foul etc desde el modal.
+   * @param statEvent 
+   */
+  eventStats(statEvent: GameStat) {
 
-  processStat(gameStat:GameStat){
-    gameStat.player = this.findPlayer( this.element[ gameStat.typeTeam.toLocaleLowerCase() ].players, gameStat.oidPlayer );
-    this[gameStat.typeTeam.toLowerCase() + "Stats"].push(gameStat);
-    
-    if(gameStat.type == "PTS" ){
-      this.PTSStats(gameStat);
-    }
-    if(gameStat.type == "PF" ){
-      this.PFStats(gameStat);
+    if (statEvent) {
+      this.eventStatsGame( statEvent );
+      this.saveStat(statEvent);
     }
   }
 
-
-
-  PTSStats(gameStat:GameStat){
-    this.element[gameStat.typeTeam.toLocaleLowerCase()+ "Score"] = this.element[gameStat.typeTeam.toLocaleLowerCase()+ "Score"] + gameStat.value;
-    //player.fouls = player.fouls? player.fouls + 1: 1;
-    
-  }
-
-  PFStats(gameStat:GameStat){
-    //let player = this.findPlayer( this.element[ gameStat.typeTeam.toLocaleLowerCase() ].players, gameStat.oidPlayer );
-    gameStat.player.fouls = gameStat.player.fouls? gameStat.player.fouls + 1: 1;
-  }
-
-  
-
-  findPlayer(list:Player[], oid:string){
-    let playerfind:Player;
-    list.forEach( player=>{ 
-      if( player.oid == oid ){
-        playerfind = player;
-        return player;
-      }
-     } );
-    return playerfind;
-  }
-
-
-
-
-
-
-  openFormacion( teamType:string ){
-    const modalRef = this.modalService.open(GameModalPlayingCrewComponent); //,{ size: 'lg' }
-    modalRef.componentInstance.team = this.element[teamType];
-    modalRef.result.then( result=>{ console.log(result) } );
+  saveStat( statEvent:GameStat ){
+    this.service.saveStat(this.element.oid, this.oidChampionship, statEvent).subscribe( 
+      data =>{
+        statEvent.saved = true;
+        statEvent.oid = data.oid;
+        //this.showEvent( statEvent );
+      }, 
+      err=>{
+        statEvent.saved = false;
+      });
   }
 
 
   /**
-   * 
-   * @param player 
-   * @param teamType 
-   */
-  optionPlayer(player:Player, teamType:string){
 
-    const modalRef = this.modalService.open(GameModalPlayingStatComponent); //,{ size: 'lg' }
-    modalRef.componentInstance.player = player;
-    modalRef.componentInstance.team = this.element[teamType];
-    modalRef.componentInstance.typeTeam = teamType.toUpperCase();
-    modalRef.componentInstance.quarter = 1;
-    modalRef.componentInstance.game = this.element;
-    modalRef.result.then( result =>{
-      result.player = player;
-      
-      if( result ){
-        let value = 0;
-        this[teamType+"Stats"].push(result);
-
-        if(result["type"] == "PTS" ){
-          value = result["value"];
-          if(teamType== "local"){
-            this.element.localScore = this.element.localScore + value;
-          }else{
-            this.element.visitorScore = this.element.visitorScore + value;
+  async showEvent( statEvent: GameStat){
+    const toast = await this.toastController.create({
+      header: `${statEvent.typeTeam}`,
+      message: `${statEvent.quarterTimeText} - ${statEvent.player.name} ${statEvent.player.lastName} ( ${statEvent.value} ${statEvent.type} )`,
+      duration : 1500,
+      position: 'bottom',
+      translucent : true,
+      buttons: [
+        {
+          text: 'Deshacer',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
           }
         }
-        
-        if( result["type"] == "PF" ){
-          player.fouls = player.fouls? player.fouls + 1: 1;
-        }
-
-
-      }
+      ]
     });
+    await toast.present();
+
+    const { role } = await toast.onDidDismiss();
+    console.log('onDidDismiss resolved with role', role);
+
+  }
+
+   */
+
+
+   /**
+   * Recibe el evento de un punto, foul etc desde el modal.
+   * @param statEvent 
+   */
+  eventStatsGame(statEvent: GameStat) {
+
+    if (statEvent) {
+      statEvent.player.stats[statEvent.type] = statEvent.player.stats[statEvent.type] + statEvent.value;
+      this.gameStats.push(statEvent);
+      this[statEvent.typeTeam.toLowerCase() + "Stats"].push(statEvent);
+
+      if (statEvent.type == "PTS" || statEvent.type == "MPT") {
+        statEvent.player.stats[statEvent.type + statEvent.value] = statEvent.player.stats[statEvent.type + statEvent.value] + statEvent.value;
+      }
+
+      if (statEvent.type == "PTS") {
+        this.eventStatsPTS(statEvent);
+      }
+
+      if (statEvent.type == "PF") {
+        this.eventStatsPF(statEvent);
+      }
+    }
+  }
+
+  eventStatsPTS(statEvent: GameStat) {
+    let value = statEvent.value;
+    if (statEvent.typeTeam.toLowerCase() == "local") {
+      this.element.localScore = this.element.localScore + value;
+      this.activeQuarter.localPoints = this.activeQuarter.localPoints + value;
+      this.element.localScoreObj = this.toDigit(this.element.localScore);
+
+
+    } else {
+      this.element.visitorScore = this.element.visitorScore + value;
+      this.activeQuarter.visitorPoints = this.activeQuarter.localPoints + value;
+
+      this.element.visitorScoreObj = this.toDigit(this.element.visitorScore);
+    }
+  }
+
+  eventStatsPF(statEvent: GameStat) {
+    statEvent.player.fouls = statEvent.player.fouls ? statEvent.player.fouls + 1 : 1;
+
+    if (statEvent.typeTeam.toLowerCase() == "local") {
+      this.activeQuarter.localFouls = this.activeQuarter.localFouls + 1;
+    }
+    else {
+      this.activeQuarter.visitorFouls = this.activeQuarter.visitorFouls + 1;
+    }
+  }
+
+  /**
+   * Convierte un integer a string con un formato de tres digitos, 
+   * por ejemplo si vienen un integer 3 retorna el string "003"
+   * @param num 
+   */
+  toDigit(num: number): Digit[] {
+    let digits: Digit[] = [];
+    let digitsSplit = num.toString().split('');
+    let size = 3 - digitsSplit.length;
+    for (var i = 0; i < size; i++) {
+      digits.push({ number: "0", active: false })
+    }
+    digitsSplit.forEach(numStr => {
+      digits.push({ number: numStr, active: true })
+    });
+    return digits;
+  }
+
+
+
+
+  eventQuarters(quarter: Quarter) {
+    this.activeQuarter = quarter;
   }
 
 }

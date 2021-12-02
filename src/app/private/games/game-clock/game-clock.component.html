@@ -1,4 +1,35 @@
-<div class="card mb-4">
+<div class="fs-6 font-monospace">
+    {{activeQuarter?.number}} {{activeQuarter?.name}}
+</div>
+<h1 class="fs-1 font-monospace">
+    <i name="time-outline" class="fs-5"></i>
+    {{timetext}}
+</h1>
+
+<div>
+    <div>
+        <div class="row">
+            <div class="col d-grid gap-2">
+                <button class="btn btn-primary btn-block" [disabled]="activeQuarter.state=='play'" (click)="startCount()">Iniciar</button>
+            </div>
+            <div class="col d-grid gap-2">
+                <button class="btn btn-primary btn-block" [disabled]="activeQuarter.state=='pause'" (click)="pauseCount()">Pausar</button>
+            </div>
+            <div class="col d-grid gap-2">
+                <button class="btn btn-danger btn-block" [disabled]="activeQuarter.state=='stop'" (click)="stopQuarter()">Detener</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col d-grid gap-2">
+                <button class="btn btn-secondary  btn-block mt-2" (click)="logs()">Registros</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- div class="card mb-4">
     <div class="card-body">
         <div class="text-center">
             <h4>
@@ -24,4 +55,4 @@
             </button>
         </div>
     </div>
-</div>
+</div-->

@@ -1,3 +1,5 @@
+import { TypeTeam } from './../../../models/type-team';
+import { TypeStat } from './../../../models/type-stat';
 import { GameStat } from './../../../models/game-stat';
 import { GamesService } from './../../../services/games.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -5,6 +7,7 @@ import { Team } from './../../../models/team';
 import { Player } from './../../../models/player';
 import { Game } from './../../../models/game';
 import { Component, OnInit, Input } from '@angular/core';
+import { Quarter } from '../../../models/quarter';
 
 @Component({
   selector: 'app-game-modal-playing-stat',
@@ -16,8 +19,8 @@ export class GameModalPlayingStatComponent implements OnInit {
   @Input() game: Game;
   @Input() team: Team;
   @Input() player: Player;
-  @Input() typeTeam : string;
-  @Input() quarter : number;
+  @Input() typeTeam : TypeTeam;
+  @Input() activeQuarter : Quarter;
 
   constructor(
     public activeModal: NgbActiveModal,
@@ -28,7 +31,7 @@ export class GameModalPlayingStatComponent implements OnInit {
   }
 
   close(){
-    this.activeModal.close(null);
+    this.activeModal.close();
   }
 
   /**
@@ -39,18 +42,12 @@ export class GameModalPlayingStatComponent implements OnInit {
   addStat(value:number, typeStat:string){
     let gameStat:GameStat = new GameStat();
     gameStat.oidPlayer = this.player.oid;
-    gameStat.quarter = 1;
+    gameStat.quarter = this.activeQuarter.number;
     gameStat.teamOid = this.team.oid;
-    gameStat.type = typeStat;
+    gameStat.type = TypeStat[typeStat];
     gameStat.typeTeam = this.typeTeam;
     gameStat.value = value;
-
-    this.gamesService.saveStat(this.game.oid, gameStat).subscribe(data=>{
-      console.log(data);
-    }, error=>{
-      alert( "Error al guardar la estadistica" + gameStat.type + gameStat.value );
-    });
-
+    gameStat.quarterTimeText = this.activeQuarter.timetext;
     this.activeModal.close(gameStat);
   }
 

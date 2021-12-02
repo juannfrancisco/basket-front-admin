@@ -1,8 +1,15 @@
+import { GameModalLogComponent } from './../game-modal-log/game-modal-log.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { GameStat } from './../../../models/game-stat';
 import { Quarter } from './../../../models/quarter';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 
 import { timer, Observable, interval, Subscription } from 'rxjs';
 import { take, takeWhile, takeUntil } from 'rxjs/operators';
+
+const STATE_CLOCK_PLAY = "play";
+const STATE_CLOCK_STOP = "stop";
+const STATE_CLOCK_PAUSE = "pause";
 
 @Component({
   selector: 'app-game-clock',
@@ -11,19 +18,46 @@ import { take, takeWhile, takeUntil } from 'rxjs/operators';
 })
 export class GameClockComponent implements OnInit {
 
+  @Input() quarter: Quarter[];
+  @Input() activeQuarter: Quarter;
+  @Input() gameStats:GameStat[];
 
-  timetext: string = "00:00:00";
-  quarter: Quarter[] = [];
-  stateWatch: string = "stop"
+  @Output() eventQuarters = new EventEmitter<Quarter>();
+
+  timetext: string = "00:00";
+  
+  stateWatch: string = STATE_CLOCK_STOP; // Eliminar
   timeInit: number = 600;
   time: number = this.timeInit;
-  timer:Subscription;
+  timer: Subscription;
 
-
-
-  constructor() { }
+  constructor(
+    private modalService: NgbModal
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  addQuarter() {
+    let quarter = new Quarter();
+    quarter.number = (this.quarter.length + 1);
+    quarter.name =  this.quarter.length > 3 ? " OT":" QT";
+    quarter.state = STATE_CLOCK_PLAY;
+    return quarter;
+  }
+
+  intervalClock( x ){
+    if (this.time > 0) {
+      this.time = this.time - 1;
+      var hour = Math.floor(this.time / 3600);
+      var min = Math.floor(this.time / 60);
+      var seconds = this.time % 60;
+      //this.timetext = (hour < 10 ? "0" + hour : hour) + ":" + (min < 10 ? "0" + min : min) + ":" + (seconds < 10 ? "0" + seconds : seconds);
+      this.timetext = (min < 10 ? "0" + min : min) + ":" + (seconds < 10 ? "0" + seconds : seconds);
+      this.activeQuarter.timetext = this.timetext;
+    } else {
+      this.stopQuarter();
+    }
   }
 
 
@@ -31,40 +65,33 @@ export class GameClockComponent implements OnInit {
 	 * 
 	 */
   startCount() {
-    if (this.stateWatch == "stop") {
-      let quarter = new Quarter();
-      quarter.name = (this.quarter.length + 1) + "quarter";
-      quarter.points = 0;
+    if (this.activeQuarter.state == STATE_CLOCK_STOP) {
+      let quarter = this.addQuarter();
+      this.activeQuarter = quarter;
       this.quarter.push(quarter);
+      this.eventQuarters.emit(quarter);
     }
-    if (this.timer && this.stateWatch== "play") { return; }
+    if (this.timer && this.activeQuarter.state == STATE_CLOCK_PLAY) { return; }
 
-    this.stateWatch = "play";
-    this.timer = interval(1000).pipe(takeWhile(val => this.stateWatch == "play" )).subscribe(x => {
-
-      if (this.time > 0) {
-        this.time = this.time - 1;
-        var hour = Math.floor(this.time / 3600);
-        var min = Math.floor(this.time / 60);
-        var seconds = this.time % 60;
-        this.timetext = (hour < 10 ? "0" + hour : hour) + ":" + (min < 10 ? "0" + min : min) + ":" + (seconds < 10 ? "0" + seconds : seconds);
-      } else {
-        this.stopQuarter();
-      }
+    this.activeQuarter.state = STATE_CLOCK_PLAY;
+    this.activeQuarter.state = STATE_CLOCK_PLAY;
+    this.timer = interval(1000).pipe(takeWhile(val => this.activeQuarter.state == STATE_CLOCK_PLAY)).subscribe(x => {
+      this.intervalClock(x);
     });
-
   };
 
+  /**
+   * 
+   */
   stopQuarter() {
-
-    this.stateWatch = "stop";
+    this.activeQuarter.state = STATE_CLOCK_STOP;
+    this.activeQuarter.state = STATE_CLOCK_STOP;
     if (this.timer) {
-      
       this.timer.unsubscribe();
       this.timer = undefined;
     }
     this.time = this.timeInit;
-    this.timetext = "00:00:00";
+    this.timetext = "00:00";
   }
 
   /**
@@ -72,11 +99,34 @@ export class GameClockComponent implements OnInit {
 	 */
   pauseCount() {
     if (this.timer) {
-      //this.timer.cancel(this.timer);
-      this.stateWatch = "pause";
+      this.activeQuarter.state = STATE_CLOCK_PAUSE;
+      this.activeQuarter.state = STATE_CLOCK_PAUSE;
       this.timer.unsubscribe();
       this.timer = undefined;
     }
   }
+
+  async logs(){
+
+    const modalRef = this.modalService.open(GameModalLogComponent); //,{ size: 'lg' }
+    modalRef.componentInstance.activeQuarter = this.activeQuarter;
+    modalRef.componentInstance.gameStats = this.gameStats;
+    modalRef.result.then( result=>{ console.log(result) } );
+
+    
+
+    /**
+    const modal = await this.modalController.create({
+      component: GameModalLogComponent,
+      componentProps: {
+        'activeQuarter': this.activeQuarter,
+        'gameStats': this.gameStats
+      }
+    });
+    await modal.present();
+    const { data } = await modal.onWillDismiss();
+     */
+  }
+
 
 }

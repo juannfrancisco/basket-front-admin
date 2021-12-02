@@ -1,0 +1,44 @@
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col">
+                <h6 class="mt-2">{{team.name}}</h6>
+            </div>
+            <div class="col text-end text-right ">
+                <div class="btn-group">
+                    <button class="btn btn-secondary" (click)="lineup()">Formación</button>
+                    <button class="btn btn-secondary" (click)="timeout()">Minuto</button>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="card-body">
+        <ul class="list-group list-group-flush">
+            <ng-container *ngFor="let player of team?.players">
+                <li class="list-group-item" *ngIf="player.headline" (click)="optionPlayer(player)">
+                    <div class="row">
+                        <div class="col-2">
+                            <div class="bg-dark text-white p-2 text-center" (click)="viewStats(player)">
+                                {{player.number}}
+                            </div>
+                        </div>
+                        <div class="col-9">
+                            <div>
+                                {{player.name}} {{player.lastName}}
+                            </div>
+                            <div class="text-muted">
+                                <small>{{player.position}}</small>
+                            </div>
+                        </div>
+                        <div class="col-1">
+                            <span class="badge rounded-pill bg-danger">{{player.fouls}}</span>
+                        </div>
+                    </div>
+                </li>
+            </ng-container>
+        </ul>
+
+    </div>
+</div>

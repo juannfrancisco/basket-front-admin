@@ -1,0 +1,46 @@
+<div class="modal-header">
+    Logs
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="close()"></button>
+</div>
+
+<div class="modal-body">
+
+    <div class="d-grid gap-2 mb-2">
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-primary">1</button>
+            <button type="button" class="btn btn-primary">2</button>
+            <button type="button" class="btn btn-primary">3</button>
+            <button type="button" class="btn btn-primary">4</button>
+        </div>
+    </div>
+
+    <div class="d-grid gap-2">
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-secondary">Local</button>
+            <button type="button" class="btn btn-secondary">Visita</button>
+        </div>
+    </div>
+
+    <hr>
+
+
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item" *ngFor="let stat of gameStats | statsFilter:numberQuarter">
+            <div class="row">
+                <div class="col">
+                    <div>
+                        <strong>Q{{stat.quarter}}</strong>
+                        {{stat.quarterTimeText}} - {{stat.player?.name}} {{stat.player?.lastName}} ( {{stat.value}} {{stat.type}} )
+                    </div>
+                </div>
+                <div class="col-3">
+                    <button class="btn btn-danger">Eliminar</button>
+                </div>
+            </div>
+        </li>
+    </ul>
+
+
+
+
+</div>

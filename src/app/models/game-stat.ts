@@ -1,12 +1,17 @@
+import { TypeTeam } from './type-team';
+import { TypeStat } from './type-stat';
 import { Player } from './player';
 export class GameStat {
+    oid:string;
     oidPlayer:string;
     quarter:number;
-    type:string;
+    quarterTimeText:string;
+    type:TypeStat;
     value:number;
-    typeTeam:string;
+    typeTeam:TypeTeam;
     teamOid:string;
 
     player?:Player;
+    saved?:boolean;
 
 }

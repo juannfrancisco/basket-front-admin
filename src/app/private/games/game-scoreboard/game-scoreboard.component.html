@@ -1,0 +1,83 @@
+<div class=" card bg-dark text-white">
+    <div class="card-body">
+        <div>
+            <div class="row">
+                <div class="col-2 text-center">
+                    <div>
+                        <img src="assets/image/icons/teams-default4.png" class="rounded" style="width:70px;" alt="...">
+                    </div>
+                    <div class="fw-bolder">{{game.local?.name}}</div>
+                    <div style="height: 34px;">
+                        <i color="warning" class="p-1" name="timer-outline" *ngFor="let timeout of activeQuarter?.localTimeouts"></i>
+                    </div>
+
+                </div>
+
+                <div class="col-2 text-center">
+                    <div class="mb-3">
+                        <span class="fw-bolder bg-white text-dark p-1 rounded lh-1">
+                            <small>LOCAL</small>
+                        </span>
+                    </div>
+                    <div>
+
+                        <div>
+                            <span class="fs-1 font-monospace fw-bolder p-2 bg-dark-2 border border-secondary rounded">
+                                <span *ngFor="let digit of game.localScoreObj" [ngClass]="{'text-secondary': !digit.active, 'text-warning':digit.active}">{{digit.number}}</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <div color="white" class="font-monospace">
+                            Fouls
+                        </div>
+                    </div>
+                    <div color="danger" class="fs-3 font-monospace">
+                        {{activeQuarter?.localFouls}}
+                    </div>
+
+                </div>
+
+                <div class="col text-center">
+                    <app-game-clock (eventQuarters)="eventQuarters($event)" [quarter]="quarters" [gameStats]="gameStats" [activeQuarter]="activeQuarter"></app-game-clock>
+                </div>
+
+                <div class="col-2 text-center">
+                    <div class="mb-3">
+                        <span class="fw-bolder bg-white text-dark p-1 rounded lh-1">
+                            <small>VISITA</small>
+                        </span>
+                    </div>
+
+                    <div>
+                        <div>
+                            <span class="fs-1 font-monospace fw-bolder p-2 bg-dark-2 border border-secondary rounded">
+                                <span *ngFor="let digit of game.visitorScoreObj" [ngClass]="{'text-secondary': !digit.active, 'text-warning':digit.active}">{{digit.number}}</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <div color="white" class="font-monospace">
+                            Fouls
+                        </div>
+                    </div>
+                    <div color="danger" class="fs-3 font-monospace">
+                        {{activeQuarter?.visitorFouls}}
+                    </div>
+
+                </div>
+
+                <div class="col-2 text-center">
+                    <div>
+                        <img src="assets/image/icons/teams-default4.png" class="rounded" style="width:70px;" alt="...">
+                    </div>
+                    <div class="fw-bolder">{{game.visitor?.name}}</div>
+                    <div style="height: 34px;">
+                        <i class="p-1" color="warning" name="timer-outline" *ngFor="let timeout of activeQuarter?.visitorTimeouts"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

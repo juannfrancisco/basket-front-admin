@@ -54,7 +54,7 @@ export class GameCreateComponent extends BaseComponent implements OnInit {
     game.championship.oid = this.oidChampionship;
     this.showLoading(this.loadingService);
 
-    this.service.save(game).subscribe(data => {
+    this.service.save(game, this.oidChampionship).subscribe(data => {
       this.hideLoading(this.loadingService);
       this.router.navigate(["/app","championships",this.oidChampionship,"games"]);
     }, error => {

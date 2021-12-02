@@ -1,0 +1,123 @@
+<div class="modal-header">
+    <div class="d-inline p-2 bg-dark text-white">{{player.number}}</div>
+    <div class="d-inline p-2">
+        <div class="fw-bolder">{{player.name}} {{player.lastName}}</div>
+        <div class="text-muted fs-6 lh-1 ">
+            <small>{{player.position}}</small>
+        </div>
+    </div>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="close()"></button>
+</div>
+
+<div class="modal-body p-0">
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <div>
+                        <i class="fs-1" name="basketball-outline" slot="start"></i>
+                        <div>
+                            <span class="fs-1 fw-bold">{{player.stats.PTS}}</span> /
+                            <span class="fs-3">{{player.stats.MPT}}</span>
+                            <br>
+                            <span class="fs-6">Puntos</span>
+                        </div>
+                    </div>
+                    <div>
+                        <div>Tiros Libres</div>
+                        <div slot="end">
+                            <span class="fs-4 fw-bold">{{player.stats.PTS1}}</span> /
+                            <span>{{player.stats.MPT1}}</span>
+                        </div>
+                    </div>
+                    <div>
+                        <div>Media Distancia</div>
+                        <div slot="end">
+                            <span class="fs-4 fw-bold">{{player.stats.PTS2}}</span> /
+                            <span>{{player.stats.MPT2}}</span>
+                        </div>
+                    </div>
+                    <div>
+                        <div>Triples</div>
+                        <div slot="end">
+                            <span class="fs-4 fw-bold">{{player.stats.PTS3}}</span> /
+                            <span>{{player.stats.MPT3}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="text-center ion-no-border">
+                        <div>
+                            <span class="fs-1 fw-bold">{{player.stats.PF}}</span>
+                            <br>
+                            <span class="fs-6">Faltas</span>
+                        </div>
+                        <div>
+                            <span class="fs-1 fw-bold">{{player.stats.MAS}}</span>
+                            <br>
+                            <span class="fs-6">Perdidas</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+
+
+            <div class="card">
+                <div class="card-body">
+                    <div>
+                        <i class="fs-1" name="bookmark-outline" slot="start"></i>
+                        <div>
+                            <span class="fs-1 fw-bold">{{player.stats.OR + player.stats.DR}}</span>
+                            <br>
+                            <span class="fs-6">Rebotes</span>
+                        </div>
+                    </div>
+                    <div>
+                        <div>Rebotes Ofensivo</div>
+                        <div slot="end">
+                            <span class="fs-4 fw-bold">{{player.stats.OR}}</span>
+                        </div>
+                    </div>
+                    <div>
+                        <div>Rebotes Defensivo</div>
+                        <div slot="end">
+                            <span class="fs-4 fw-bold">{{player.stats.DR}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <div>
+                        <div>Asistencias</div>
+                        <div slot="end">
+                            <span class="fs-4 fw-bold">{{player.stats.AST}}</span> /
+                            <span>{{player.stats.AST}}</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div>Robos</div>
+                        <div slot="end">
+                            <span class="fs-4 fw-bold">{{player.stats.STL}}</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div>Tapas</div>
+                        <div slot="end">
+                            <span class="fs-4 fw-bold">{{player.stats.BLK}}</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

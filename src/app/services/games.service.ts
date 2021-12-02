@@ -21,16 +21,16 @@ export class GamesService {
   }
 
 
-  findById( oid:string ){
-    return this.http.get<Game>( environment.endpoint +  "games/" + oid );
+  findById( oid:string , oidChampionship:string){
+    return this.http.get<Game>( environment.endpoint  + "championships/" + oidChampionship + "/games/" + oid );
   }
 
   deleteById( oid:string ){
     return this.http.delete( environment.endpoint +  "games/" + oid );
   }
 
-  save( game:Game ){
-    return this.http.put( environment.endpoint +  "games", game );
+  save( game:Game, oidChampionship:string ){
+    return this.http.put( environment.endpoint + "championships/" + oidChampionship+  "/games", game );
   }
 
   update( game:Game ){
@@ -42,11 +42,11 @@ export class GamesService {
   }
 
 
-  findStats( oid:string ){
-    return this.http.get<GameStat[]>( environment.endpoint +  "games/" + oid + "/stats" );
+  findStats( oid:string, oidChampionship:string ){
+    return this.http.get<GameStat[]>( environment.endpoint + "championships/" + oidChampionship+  "/games/" + oid + "/stats" );
   }
 
-  saveStat( oid:string, gameStat:GameStat ){
-    return this.http.put( environment.endpoint +  "games/" + oid + "/stats" , gameStat);
+  saveStat( oid:string, oidChampionship:string, gameStat:GameStat ){
+    return this.http.put<GameStat>( environment.endpoint + "championships/" + oidChampionship+  "/games/" + oid + "/stats" , gameStat);
   }
 }

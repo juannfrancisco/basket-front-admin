@@ -1,3 +1,4 @@
+import { GameScoreboardComponent } from './private/games/game-scoreboard/game-scoreboard.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -44,6 +45,11 @@ import { GamePlayingComponent } from './private/games/game-playing/game-playing.
 import { GameModalPlayingCrewComponent } from './private/games/game-modal-playing-crew/game-modal-playing-crew.component';
 import { GameModalPlayingStatComponent } from './private/games/game-modal-playing-stat/game-modal-playing-stat.component';
 import { GameClockComponent } from './private/games/game-clock/game-clock.component';
+import { GameLineupComponent } from './private/games/game-lineup/game-lineup.component';
+import { GameModalStatComponent } from './private/games/game-modal-stat/game-modal-stat.component';
+import { GameModalStatPlayerComponent } from './private/games/game-modal-stat-player/game-modal-stat-player.component';
+import { GameModalLogComponent } from './private/games/game-modal-log/game-modal-log.component';
+import { StatsFilterPipe } from './pipes/stats-filter.pipe';
 
 
 @NgModule({
@@ -86,7 +92,13 @@ import { GameClockComponent } from './private/games/game-clock/game-clock.compon
     GamePlayingComponent,
     GameModalPlayingCrewComponent,
     GameModalPlayingStatComponent,
-    GameClockComponent
+    GameClockComponent,
+    GameScoreboardComponent,
+    GameLineupComponent,
+    GameModalStatComponent,
+    GameModalStatPlayerComponent,
+    GameModalLogComponent,
+    StatsFilterPipe
   ],
   imports: [
     BrowserModule,

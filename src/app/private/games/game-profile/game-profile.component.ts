@@ -47,7 +47,7 @@ export class GameProfileComponent extends BaseComponent implements OnInit {
   async findById( oidURL ){
     try{
       this.showLoading(this.loadingService, true);
-      this.element = await this.service.findById(oidURL).toPromise();            
+      this.element = await this.service.findById(oidURL, this.oidChampionship).toPromise();            
       this.hideLoading(this.loadingService);
       this.title = this.element.local.name + " vs " + this.element.visitor.name;
     }catch(e){

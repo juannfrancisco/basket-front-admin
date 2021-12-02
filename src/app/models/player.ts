@@ -1,3 +1,4 @@
+import { Stats } from './stats';
 export class Player {
     oid:string;
     oidCurrentTeam:string;
@@ -14,5 +15,6 @@ export class Player {
 
     headline?:boolean;
     fouls?:number;
+    stats?:Stats;
 
 }
