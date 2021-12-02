@@ -1,17 +1,17 @@
-<section id="main" role="main">
+<section id="main" role="main" *ngIf="element">
     <div class="container-fluid">
         <app-page-header [title]="title" [breadcrumbs]="breadcrumbs">
         </app-page-header>
 
 
-        <div class="row mb-4" *ngIf="element">
+        <div class="row mb-4">
             <div class="col">
                 <app-game-scoreboard [game]="element" [quarters]="quarters" [activeQuarter]="activeQuarter" [gameStats]="gameStats" (events)="eventQuarters($event)"></app-game-scoreboard>
             </div>
         </div>
 
 
-        <div class="row">
+        <div class="row mb-4">
             <div class="col-md-6 col-sm-6">
                 <app-game-lineup (stats)="eventStats($event)" [game]="element" [team]="element.local" [activeQuarter]="activeQuarter" [typeTeam]="'LOCAL'"></app-game-lineup>
             </div>
@@ -21,61 +21,11 @@
         </div>
 
         <div class="row">
-            <div class="col-md-6 col-sm-6">
-                <div class="card mb-3">
-                    <div class="card-header">
-                        Estadistica
-                    </div>
-                    <div class="card-body">
-
-                        <div class="list-group ma15">
-                            <ul class="list-group list-group-flush">
-                                <ng-container *ngFor="let stat of localStats">
-                                    <li class="list-group-item">
-                                        <div class="row">
-                                            <div class="col-2">
-                                                {{stat.value}} {{stat.type}}
-                                            </div>
-                                            <div class="col-10">
-                                                {{stat.player.name}} {{stat.player.lastName}}
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ng-container>
-                            </ul>
-                        </div>
-
-                    </div>
-                </div>
-
-
+            <div class="col-md-6 col-sm-6 p-4">
+                <app-game-list-players [players]="element.local?.players" ></app-game-list-players>
             </div>
-            <div class="col-md-6 col-sm-6">
-                <div class="card mb-3">
-                    <div class="card-header">
-                        Estadistica
-                    </div>
-                    <div class="card-body">
-
-                        <div class="list-group ma15">
-                            <ul class="list-group list-group-flush">
-                                <ng-container *ngFor="let stat of visitorStats">
-                                    <li class="list-group-item">
-                                        <div class="row">
-                                            <div class="col-2">
-                                                {{stat.value}} {{stat.type}}
-                                            </div>
-                                            <div class="col-10">
-                                                {{stat.player.name}} {{stat.player.lastName}}
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ng-container>
-                            </ul>
-                        </div>
-
-                    </div>
-                </div>
+            <div class="col-md-6 col-sm-6 p-4">
+                <app-game-list-players [players]="element.visitor?.players" ></app-game-list-players>
             </div>
         </div>
 

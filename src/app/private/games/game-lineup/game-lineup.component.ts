@@ -67,15 +67,6 @@ export class GameLineupComponent implements OnInit {
     const modalRef = this.modalService.open(GameModalStatPlayerComponent); //,{ size: 'lg' }
     modalRef.componentInstance.player = player;
     modalRef.result.then( result=>{ console.log(result) } );
-    /**
-    const modal = await this.modalController.create({
-      component: GameModalStatPlayerComponent,
-      componentProps: {
-        'player': player
-      }
-    });
-    return await modal.present();
-     */
   }
 
   async timeout( ){

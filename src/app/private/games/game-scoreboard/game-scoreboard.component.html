@@ -8,7 +8,7 @@
                     </div>
                     <div class="fw-bolder">{{game.local?.name}}</div>
                     <div style="height: 34px;">
-                        <i color="warning" class="p-1" name="timer-outline" *ngFor="let timeout of activeQuarter?.localTimeouts"></i>
+                        <i class="p-1 bi bi-clock text-warning"  *ngFor="let timeout of activeQuarter?.localTimeouts"></i>
                     </div>
 
                 </div>
@@ -73,7 +73,7 @@
                     </div>
                     <div class="fw-bolder">{{game.visitor?.name}}</div>
                     <div style="height: 34px;">
-                        <i class="p-1" color="warning" name="timer-outline" *ngFor="let timeout of activeQuarter?.visitorTimeouts"></i>
+                        <i class="p-1 bi bi-clock text-warning" *ngFor="let timeout of activeQuarter?.visitorTimeouts"></i>
                     </div>
                 </div>
             </div>

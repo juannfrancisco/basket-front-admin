@@ -50,6 +50,7 @@ import { GameModalStatComponent } from './private/games/game-modal-stat/game-mod
 import { GameModalStatPlayerComponent } from './private/games/game-modal-stat-player/game-modal-stat-player.component';
 import { GameModalLogComponent } from './private/games/game-modal-log/game-modal-log.component';
 import { StatsFilterPipe } from './pipes/stats-filter.pipe';
+import { GameListPlayersComponent } from './private/games/game-list-players/game-list-players.component';
 
 
 @NgModule({
@@ -98,7 +99,8 @@ import { StatsFilterPipe } from './pipes/stats-filter.pipe';
     GameModalStatComponent,
     GameModalStatPlayerComponent,
     GameModalLogComponent,
-    StatsFilterPipe
+    StatsFilterPipe,
+    GameListPlayersComponent
   ],
   imports: [
     BrowserModule,

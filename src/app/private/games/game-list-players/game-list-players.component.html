@@ -1,0 +1,23 @@
+<div class="row">
+    <div class="col-4" *ngFor="let player of players">
+        <div class="card mb-3" (click)="viewStats(player)">
+            <div class="card-body">
+                <div class="d-flex bd-highlight">
+                    <div class="flex-fill bd-highlight">
+
+                        <div class="text-center p-2" 
+                        style=" width: 40px; height: 40px; line-height: 20px;font-size: 20px;background-color: #bfc2c4;color: #fff;"> {{player.number}}</div>
+
+                    </div>
+                    <div class="flex-fill bd-highlight">
+                        <div class="fw-bold">{{player.name}} </div>
+                        <div class="fw-bold">{{player.lastName}}</div>
+                        <div class="fw-light">{{player.position}}</div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
