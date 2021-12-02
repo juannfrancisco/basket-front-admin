@@ -25,7 +25,7 @@ import { Stats } from '../../../models/stats';
 export class GamePlayingComponent extends BaseComponent implements OnInit {
 
 
-  element: Game = new Game();
+  element: Game;
   localStats: GameStat[] = [];
   visitorStats: GameStat[] = [];
   oidChampionship: string;
