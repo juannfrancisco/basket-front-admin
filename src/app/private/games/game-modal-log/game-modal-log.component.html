@@ -6,18 +6,30 @@
 <div class="modal-body">
 
     <div class="d-grid gap-2 mb-2">
-        <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-primary">1</button>
-            <button type="button" class="btn btn-primary">2</button>
-            <button type="button" class="btn btn-primary">3</button>
-            <button type="button" class="btn btn-primary">4</button>
+        <div class="btn-group" role="group" aria-label="Filter Stats">
+            <button type="button" class="btn btn-warning" (click)="typeStatChanged('PTS')">PTS</button>
+            <button type="button" class="btn btn-warning" (click)="typeStatChanged('AST')">AST</button>
+            <button type="button" class="btn btn-warning" (click)="typeStatChanged('REB')">REB</button>
+            <button type="button" class="btn btn-warning" (click)="typeStatChanged('PF')">PF</button>
+            <button type="button" class="btn btn-warning" (click)="typeStatChanged('')">ALL</button>
+
+        </div>
+    </div>
+
+
+    <div class="d-grid gap-2 mb-2">
+        <div class="btn-group" role="group" aria-label="Filter Quarter">
+            <button type="button" class="btn btn-primary" (click)="quarterChanged(1)">1</button>
+            <button type="button" class="btn btn-primary" (click)="quarterChanged(2)">2</button>
+            <button type="button" class="btn btn-primary" (click)="quarterChanged(3)">3</button>
+            <button type="button" class="btn btn-primary" (click)="quarterChanged(4)">4</button>
         </div>
     </div>
 
     <div class="d-grid gap-2">
-        <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-secondary">Local</button>
-            <button type="button" class="btn btn-secondary">Visita</button>
+        <div class="btn-group" role="group" aria-label="Filter Team">
+            <button type="button" class="btn btn-secondary" (click)="teamChanged('LOCAL')">Local</button>
+            <button type="button" class="btn btn-secondary" (click)="teamChanged('VISITOR')">Visita</button>
         </div>
     </div>
 
@@ -25,16 +37,16 @@
 
 
     <ul class="list-group list-group-flush">
-        <li class="list-group-item" *ngFor="let stat of gameStats | statsFilter:numberQuarter">
-            <div class="row">
+        <li class="list-group-item" *ngFor="let stat of gameStats | statsFilter:numberQuarter:typeTeam:typeStat">
+            <div class="row" >
                 <div class="col">
                     <div>
                         <strong>Q{{stat.quarter}}</strong>
-                        {{stat.quarterTimeText}} - {{stat.player?.name}} {{stat.player?.lastName}} ( {{stat.value}} {{stat.type}} )
+                        {{stat.quarterTimeText}} - {{stat.player?.name}} {{stat.player?.lastName}} # {{stat.player?.number}} ( {{stat.value}} {{stat.type}} )
                     </div>
                 </div>
                 <div class="col-3">
-                    <button class="btn btn-danger">Eliminar</button>
+                    <button class="btn btn-danger" (click)=deleteStat(stat)>Eliminar</button>
                 </div>
             </div>
         </li>

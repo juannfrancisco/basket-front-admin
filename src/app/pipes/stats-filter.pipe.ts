@@ -1,3 +1,5 @@
+import { TypeStat } from './../models/type-stat';
+import { TypeTeam } from './../models/type-team';
 import { GameStat } from './../models/game-stat';
 import { Pipe, PipeTransform } from '@angular/core';
 
@@ -6,7 +8,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class StatsFilterPipe implements PipeTransform {
 
-  transform(data: GameStat[], quarter: number): GameStat[] {
+  transform(data: GameStat[], quarter: number, typeTeam?:TypeTeam, typeStat?:TypeStat ): GameStat[] {
 
     data = data.sort((a, b) => (a.quarterTimeText.localeCompare(b.quarterTimeText)));
     data = data.sort((a, b) => (a.quarter < b.quarter ? -1 : 1));
@@ -14,7 +16,16 @@ export class StatsFilterPipe implements PipeTransform {
     if (!data || !quarter || quarter == 0) {
       return data;
     }
-    return data.filter(item => item.quarter == quarter);
+    data = data.filter(item => item.quarter == quarter);
+
+    if(typeTeam){
+      data = data.filter(item => item.typeTeam == typeTeam);
+    }
+
+    if(typeStat){
+      data = data.filter(item => item.type == typeStat);
+    }
+    return data;
   }
 
 }
