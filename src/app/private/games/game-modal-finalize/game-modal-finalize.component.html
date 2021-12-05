@@ -35,5 +35,8 @@
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="close()">Salir</button>
-    <button type="button" class="btn btn-primary" (click)="save()">Guardar</button>
+    <button type="button" class="btn btn-primary" (click)="save()" [disabled]="isLoading">
+        Guardar
+        <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" *ngIf="isLoading"></span>
+    </button>
 </div>

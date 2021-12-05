@@ -37,8 +37,8 @@ export class GamesService {
     return this.http.post( environment.endpoint +  "games", game );
   }
 
-  updateState( game:Game ){
-    return this.http.post( environment.endpoint +  "games/"+game.oid+"/state", game );
+  updateState( game:Game, oidChampionship:string ){
+    return this.http.post( environment.endpoint + "championships/" + oidChampionship+  "/games/"+game.oid+"/state", game );
   }
 
 

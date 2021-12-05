@@ -61,6 +61,15 @@ export class GameProfileComponent extends BaseComponent implements OnInit {
     modalRef.componentInstance.local = this.element.local;
     modalRef.componentInstance.visitor = this.element.visitor;
     modalRef.componentInstance.game = this.element;
+    modalRef.componentInstance.oidChampionship = this.oidChampionship;
+  }
+
+
+  scoreboard(){
+
+  }
+  sumarize(){
+
   }
 
 }

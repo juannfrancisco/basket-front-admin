@@ -16,9 +16,11 @@ export class GameModalFinalizeComponent implements OnInit {
   @Input() local:Team;
   @Input() visitor:Team;
   @Input() game:Game;
+  @Input() oidChampionship:string;
 
   scoreVisitor:number;
   scoreLocal:number;
+  isLoading:boolean;
 
   constructor( 
     public activeModal: NgbActiveModal,
@@ -37,12 +39,14 @@ export class GameModalFinalizeComponent implements OnInit {
     gameUpdate.oid = this.game.oid;
     gameUpdate.localScore = this.scoreLocal;
     gameUpdate.visitorScore = this.scoreVisitor;
+    this.isLoading = true;
 
-    this.gamesService.updateState( gameUpdate ).subscribe( 
+    this.gamesService.updateState( gameUpdate , this.oidChampionship ).subscribe( 
       data=>{
-        console.log( "OK" );
+        this.activeModal.dismiss();
       },
       err=>{
+        this.isLoading = false;
         alert( "err" );
       });
   }

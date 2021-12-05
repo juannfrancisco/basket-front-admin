@@ -110,9 +110,12 @@
             <h5 class="card-title">Opciones</h5>
             <hr>
             <div class="d-grid gap-2">
-              <a class="btn btn-outline-primary" routerLink="../playing">Iniciar Partido</a>
-              <button class="btn btn-outline-danger" (click)="finalize()" >Finalizar Encuentro</button>
+              <a class="btn btn-outline-primary" routerLink="../playing" >Iniciar Partido</a>
+              <button class="btn btn-outline-danger" (click)="finalize()" [disabled]="element.state == 'FINALIZED' " >Finalizar Encuentro</button>
               <a class="btn btn-outline-secondary" routerLink="../edit">Editar</a>
+
+              <button class="btn btn-outline-primary" (click)="scoreboard()" [disabled]="element.state == 'FINALIZED' " >Calcular Scorebox</button>
+              <button class="btn btn-outline-primary" (click)="sumarize()" [disabled]="element.state == 'FINALIZED' " >Sumarizar Estadisticas</button>
             </div>
 
           </div>
