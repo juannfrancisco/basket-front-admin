@@ -71,14 +71,14 @@
               <h4 class="card-title float-start">Jugadores</h4>
               <div class="text-end float-end">
                 <div class="btn-group btn-group-sm" role="group">
-                  <a class="btn btn-outline-secondary" [routerLink]="['/app','teams', element.oid, 'players','create']">Nuevo Jugador</a>
+                  <a class="btn btn-outline-secondary" [routerLink]="['/app','championships', oidChampionship, 'teams', element.oid, 'players','create']">Nuevo Jugador</a>
                 </div>
               </div>
             </div>
             <hr>
 
             <ul class="list-group list-group-flush">
-              <li class="list-group-item" *ngFor="let player of players">
+              <li class="list-group-item" *ngFor="let player of players" (click)="viewPlayer( player )">
                 <div class="row" >
                   <div class="col-1" >
                     <div class="bg-secondary text-center text-white p-2" >

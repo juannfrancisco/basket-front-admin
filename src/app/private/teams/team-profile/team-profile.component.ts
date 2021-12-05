@@ -1,3 +1,4 @@
+import { element } from 'protractor';
 import { Player } from './../../../models/player';
 import { PlayersService } from './../../../services/players.service';
 import { constants } from './../../../../environments/constants';
@@ -74,6 +75,10 @@ export class TeamProfileComponent extends BaseComponent implements OnInit {
   
   remove(team:Team){
     this.router.navigate( ['/app','teams',team.oid, 'profile'] );
+  }
+
+  viewPlayer(player:Player){
+    this.router.navigate(['/app', 'championships',this.oidChampionship, 'teams',this.element.oid, 'players' , player.oid , 'edit']);
   }
 
 }

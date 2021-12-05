@@ -15,6 +15,7 @@ export class PlayerCreateComponent extends BaseComponent implements OnInit {
 
   item: Player = new Player();
   oidTeam : string;
+  oidChampionship : string;
 
   constructor(
     private service: PlayersService,
@@ -30,6 +31,7 @@ export class PlayerCreateComponent extends BaseComponent implements OnInit {
 
   ngOnInit() {
     this.oidTeam = this.route.snapshot.paramMap.get('id');
+    this.oidChampionship = this.route.snapshot.paramMap.get('idChampionship');
   }
 
   save( player:Player ){
@@ -38,7 +40,7 @@ export class PlayerCreateComponent extends BaseComponent implements OnInit {
     this.service.save( player ).subscribe(  
       data=>{
         this.hideLoading( this.loadingService );
-        this.router.navigate(["/app/teams",this.oidTeam, "profile" ]);
+        this.router.navigate(["/app/championships",this.oidChampionship, "teams",this.oidTeam, "profile" ]);
       }, 
       err =>{
         this.hideLoading( this.loadingService );

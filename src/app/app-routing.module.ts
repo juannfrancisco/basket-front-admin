@@ -1,3 +1,4 @@
+import { PlayerEditComponent } from './private/players/player-edit/player-edit.component';
 import { ChampionshipCreateComponent } from './private/championships/championship-create/championship-create.component';
 import { GamePlayingComponent } from './private/games/game-playing/game-playing.component';
 import { ChampionshipProfileComponent } from './private/championships/championship-profile/championship-profile.component';
@@ -58,6 +59,7 @@ const routes: Routes = [
       {path: 'championships/:idChampionship/teams/:id/edit',component: TeamEditComponent},
       {path: 'championships/:idChampionship/teams/:id/profile',component: TeamProfileComponent},
       {path: 'championships/:idChampionship/teams/:id/players/create',component: PlayerCreateComponent},
+      {path: 'championships/:idChampionship/teams/:idTeam/players/:idPlayer/edit',component: PlayerEditComponent},
 
 
 
