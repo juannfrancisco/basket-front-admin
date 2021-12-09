@@ -1,11 +1,12 @@
 <div class="fs-6 font-monospace">
     {{activeQuarter?.number}} {{activeQuarter?.name}}
 </div>
-<h1 class="fs-1 font-monospace">
+<h1 class="fs-1 font-monospace"
+    [class.text-warning]="activeQuarter.state=='pause'"
+    [class.text-danger]="activeQuarter.state=='stop'">
     <i name="time-outline" class="fs-5"></i>
     {{timetext}}
 </h1>
-
 <div>
     <div>
         <div class="row">
@@ -26,33 +27,3 @@
         </div>
     </div>
 </div>
-
-
-
-<!-- div class="card mb-4">
-    <div class="card-body">
-        <div class="text-center">
-            <h4>
-                <i class="bi bi-clock-fill"></i>
-                {{timetext}}
-            </h4>
-            <h5 class="semibold mb0">{{quarter.length}}er Cuarto</h5>            
-        </div>
-    </div>
-    <div class="card-footer text-center">
-        <div class="btn-group" role="group" >
-            <button type="button" class="btn btn-outline-primary" [disabled]="stateWatch=='play'" (click)="startCount()">
-                <i class="bi bi-play-fill"></i>
-                <div>Iniciar</div>
-            </button>
-            <button type="button" class="btn btn-outline-primary" [disabled]="stateWatch=='pause' || stateWatch=='stop'" (click)="pauseCount()">
-                <i class="bi bi-pause-fill"></i>
-                <div>Pausar</div>
-            </button>
-            <button type="button" class="btn btn-outline-danger" [disabled]="stateWatch=='stop'" (click)="stopQuarter()">
-                <i class="bi bi-stop-fill"></i>
-                <div>Detener</div>
-            </button>
-        </div>
-    </div>
-</div-->
